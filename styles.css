@@ -7,16 +7,16 @@
   --bl-border-color-standard: #c5c5c5;
   --bl-brand-color-6: #165dff;
   --bl-mask-color-dark: rgba(0, 0, 0, 0.4);
-  --bl-spacing-01: 8px;
-  --bl-spacing-03: 24px;
-  --bl-spacing-04: 32px;
-  --bl-spacing-06: 48px;
-  --bl-font-size-text-03: 28px;
-  --bl-font-size-text-04: 32px;
-  --bl-font-size-text-05: 40px;
-  --bl-font-height-text-03: 40px;
-  --bl-font-height-text-04: 44px;
-  --bl-font-height-text-05: 56px;
+  --bl-spacing-01: 4px;
+  --bl-spacing-03: 12px;
+  --bl-spacing-04: 16px;
+  --bl-spacing-06: 24px;
+  --bl-font-size-text-03: 14px;
+  --bl-font-size-text-04: 16px;
+  --bl-font-size-text-05: 20px;
+  --bl-font-height-text-03: 20px;
+  --bl-font-height-text-04: 22px;
+  --bl-font-height-text-05: 28px;
 }
 
 * {
@@ -36,8 +36,8 @@ body {
 
 .container {
   position: relative;
-  width: 750px;
-  height: 1624px;
+  width: 375px;
+  height: 812px;
   margin: 0 auto;
   background-color: var(--bl-fill-color-primary);
   overflow: hidden;
@@ -48,19 +48,19 @@ body {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 750px;
-  height: 68px;
+  width: 375px;
+  height: 34px;
 }
 
 .home-indicator-bar {
   position: absolute;
   left: 50%;
-  top: calc(50% + 13px);
+  top: calc(50% + 6.5px);
   transform: translate(-50%, -50%);
-  width: 296px;
-  height: 10px;
+  width: 148px;
+  height: 5px;
   background-color: var(--bl-text-color-primary);
-  border-radius: 2.5px;
+  border-radius: 1.25px;
 }
 
 /* Main Content */
@@ -68,17 +68,17 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  width: 750px;
+  width: 375px;
   display: flex;
   flex-direction: column;
-  gap: 80px;
+  gap: 40px;
   align-items: center;
 }
 
 .content-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 16px;
   align-items: flex-start;
   width: 100%;
 }
@@ -94,8 +94,8 @@ body {
 /* Status Bar */
 .status-bar {
   background-color: transparent;
-  height: 88px;
-  width: 750px;
+  height: 44px;
+  width: 375px;
   position: absolute;
   top: 0;
   left: 0;
@@ -106,8 +106,8 @@ body {
   position: absolute;
   left: 0;
   top: 0;
-  width: 280px;
-  height: 88px;
+  width: 140px;
+  height: 44px;
 }
 
 .time-text {
@@ -115,8 +115,8 @@ body {
   inset: 33.96% 35.9% 16.04% 35.53%;
   font-family: 'SF Pro', sans-serif;
   font-weight: 600;
-  font-size: 34px;
-  line-height: 44px;
+  font-size: 17px;
+  line-height: 22px;
   text-align: center;
   color: var(--bl-text-color-primary);
 }
@@ -125,8 +125,8 @@ body {
   position: absolute;
   right: 0;
   top: 0;
-  width: 282px;
-  height: 88px;
+  width: 141px;
+  height: 44px;
 }
 
 .status-icon {
@@ -139,16 +139,16 @@ body {
 .nav-bar {
   background-color: var(--bl-fill-color-primary);
   display: flex;
-  gap: 48px;
+  gap: 24px;
   align-items: flex-end;
-  padding: 20px 32px;
-  width: 750px;
+  padding: 10px 16px;
+  width: 375px;
   overflow: hidden;
 }
 
 .back-button {
-  width: 48px;
-  height: 48px;
+  width: 24px;
+  height: 24px;
   border: none;
   background: transparent;
   cursor: pointer;
@@ -169,13 +169,13 @@ body {
 }
 
 .arrow-icon {
-  width: 24px;
-  height: 24px;
+  width: 12px;
+  height: 12px;
 }
 
 .nav-spacer {
-  width: 48px;
-  height: 48px;
+  width: 24px;
+  height: 24px;
   flex-shrink: 0;
 }
 
@@ -183,7 +183,7 @@ body {
 .content-section {
   display: flex;
   flex-direction: column;
-  gap: 64px;
+  gap: 32px;
   align-items: flex-start;
   width: 100%;
 }
@@ -193,7 +193,7 @@ body {
   background-color: white;
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 24px;
   align-items: flex-start;
   width: 100%;
 }
@@ -201,17 +201,17 @@ body {
 .welcome-text-section {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
   align-items: flex-start;
-  padding: 0 32px;
+  padding: 0 16px;
   width: 100%;
 }
 
 .welcome-title {
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
-  font-size: 56px;
-  line-height: 78px;
+  font-size: 28px;
+  line-height: 39px;
   color: var(--bl-text-color-primary);
   width: 100%;
 }
@@ -219,8 +219,8 @@ body {
 .welcome-subtitle {
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
-  font-size: 32px;
-  line-height: 44px;
+  font-size: 16px;
+  line-height: 22px;
   color: var(--bl-text-color-secondary);
   width: 100%;
 }
@@ -230,28 +230,28 @@ body {
   background-color: white;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 12px;
   align-items: flex-start;
-  padding: 0 32px;
-  width: 750px;
+  padding: 0 16px;
+  width: 375px;
 }
 
 .input-label {
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
-  font-size: 28px;
-  line-height: 40px;
+  font-size: 14px;
+  line-height: 20px;
   color: var(--bl-text-color-primary);
   width: 100%;
 }
 
 .phone-input-container {
   border: 1px solid var(--bl-border-color-standard);
-  border-radius: 12px;
+  border-radius: 6px;
   display: flex;
   flex-direction: column;
-  height: 116px;
-  padding: 32px;
+  height: 58px;
+  padding: 16px;
   width: 100%;
 }
 
@@ -264,20 +264,20 @@ body {
 
 .country-selector {
   display: flex;
-  gap: 24px;
+  gap: 12px;
   align-items: center;
   flex: 1;
 }
 
 .country-flag-wrapper {
   display: flex;
-  gap: 16px;
+  gap: 8px;
   align-items: center;
 }
 
 .country-flag {
-  width: 48px;
-  height: 48px;
+  width: 24px;
+  height: 24px;
   overflow: hidden;
   position: relative;
   flex-shrink: 0;
@@ -286,33 +286,33 @@ body {
 .flag-image {
   position: absolute;
   left: 0;
-  top: 8px;
-  width: 48px;
-  height: 32px;
+  top: 4px;
+  width: 24px;
+  height: 16px;
   display: block;
 }
 
 .country-code {
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
-  font-size: 32px;
-  line-height: 44px;
+  font-size: 16px;
+  line-height: 22px;
   color: var(--bl-text-color-primary);
   white-space: nowrap;
 }
 
 .divider-vertical {
   width: 0;
-  height: 32px;
+  height: 16px;
   border-left: 1px solid rgba(231, 231, 231, 1);
-  margin: 0 12px;
+  margin: 0 6px;
 }
 
 .phone-input {
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
-  font-size: 32px;
-  line-height: 44px;
+  font-size: 16px;
+  line-height: 22px;
   color: var(--bl-text-color-primary);
   border: none;
   outline: none;
@@ -326,8 +326,8 @@ body {
 }
 
 .clear-button {
-  width: 48px;
-  height: 48px;
+  width: 24px;
+  height: 24px;
   border: none;
   background: transparent;
   cursor: pointer;
@@ -355,7 +355,7 @@ body {
 .action-section {
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 24px;
   align-items: flex-start;
   width: 100%;
 }
@@ -363,10 +363,10 @@ body {
 .agreement-section {
   background-color: white;
   display: flex;
-  gap: 24px;
+  gap: 12px;
   align-items: flex-start;
-  padding: 0 32px;
-  width: 750px;
+  padding: 0 16px;
+  width: 375px;
 }
 
 .checkbox-wrapper {
@@ -381,10 +381,10 @@ body {
 }
 
 .checkbox-custom {
-  width: 32px;
-  height: 32px;
+  width: 16px;
+  height: 16px;
   border: 1px solid var(--bl-border-color-standard);
-  border-radius: 4px;
+  border-radius: 2px;
   display: inline-block;
   position: relative;
   transition: all 0.2s;
@@ -403,15 +403,15 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
-  font-size: 20px;
+  font-size: 10px;
   font-weight: bold;
 }
 
 .agreement-text {
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 7px;
+  line-height: 10px;
   color: var(--bl-text-color-secondary);
   flex: 1;
 }
@@ -430,8 +430,8 @@ body {
 .button-section {
   display: flex;
   flex-direction: column;
-  height: 96px;
-  padding: 0 32px;
+  height: 48px;
+  padding: 0 16px;
   width: 100%;
 }
 
@@ -445,13 +445,13 @@ body {
 .primary-button {
   background-color: var(--bl-brand-color-6);
   display: flex;
-  height: 96px;
+  height: 48px;
   align-items: center;
   justify-content: center;
-  padding: 28px 48px;
-  border-radius: 100px;
+  padding: 14px 24px;
+  border-radius: 50px;
   border: none;
-  width: 686px;
+  width: 343px;
   cursor: pointer;
   transition: all 0.3s;
 }
@@ -477,8 +477,8 @@ body {
 .primary-button span {
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
-  font-size: 32px;
-  line-height: 44px;
+  font-size: 16px;
+  line-height: 22px;
   color: var(--bl-text-color-allwhite);
   text-align: center;
   flex: 1;
@@ -489,8 +489,8 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  width: 750px;
-  height: 1624px;
+  width: 375px;
+  height: 812px;
   background-color: var(--bl-mask-color-dark);
   z-index: 100;
 }
@@ -500,7 +500,7 @@ body {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 750px;
+  width: 375px;
   z-index: 200;
   animation: slideUp 0.3s ease-out;
 }
@@ -518,11 +518,11 @@ body {
   background-color: white;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  height: 438px;
+  gap: 4px;
+  height: 219px;
   align-items: center;
   overflow: hidden;
-  border-radius: 48px 48px 0 0;
+  border-radius: 24px 24px 0 0;
   width: 100%;
 }
 
@@ -531,13 +531,13 @@ body {
   flex-direction: column;
   align-items: flex-end;
   justify-content: center;
-  padding: 24px 32px;
+  padding: 12px 16px;
   width: 100%;
 }
 
 .modal-close-button {
-  width: 48px;
-  height: 48px;
+  width: 24px;
+  height: 24px;
   border: none;
   background: transparent;
   cursor: pointer;
@@ -568,7 +568,7 @@ body {
 .modal-text-section {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 12px;
   align-items: flex-start;
   width: 100%;
 }
@@ -576,41 +576,41 @@ body {
 .modal-title {
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
-  font-size: 40px;
-  line-height: 56px;
+  font-size: 20px;
+  line-height: 28px;
   color: var(--bl-text-color-primary);
   text-align: center;
   width: 100%;
-  padding: 0 32px;
+  padding: 0 16px;
 }
 
 .modal-description {
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
-  font-size: 32px;
-  line-height: 44px;
+  font-size: 16px;
+  line-height: 22px;
   color: var(--bl-text-color-primary);
   text-align: center;
   width: 100%;
-  padding: 0 32px;
+  padding: 0 16px;
 }
 
 .modal-button-wrapper {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 24px 32px;
+  padding: 12px 16px;
   width: 100%;
 }
 
 .modal-button {
   background-color: var(--bl-brand-color-6);
   display: flex;
-  height: 48px;
+  height: 24px;
   align-items: center;
   justify-content: center;
-  padding: 28px 48px;
-  border-radius: 100px;
+  padding: 14px 24px;
+  border-radius: 50px;
   border: none;
   width: 100%;
   cursor: pointer;
@@ -631,8 +631,8 @@ body {
 .modal-button span {
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
-  font-size: 32px;
-  line-height: 44px;
+  font-size: 16px;
+  line-height: 22px;
   color: var(--bl-text-color-allwhite);
   text-align: center;
   flex: 1;
@@ -642,7 +642,7 @@ body {
 @media (max-width: 768px) {
   .container {
     width: 100%;
-    max-width: 750px;
+    max-width: 375px;
   }
   
   .home-indicator,
@@ -698,8 +698,8 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  width: 750px;
-  height: 1060px;
+  width: 375px;
+  height: 530px;
   background-color: #165dff;
   z-index: 1;
 }
@@ -707,10 +707,10 @@ body {
 /* Welcome Decorative Shape */
 .welcome-shape {
   position: absolute;
-  left: -98.22px;
-  top: -202.91px;
-  width: 1254.223px;
-  height: 1290.058px;
+  left: -49.11px;
+  top: -101.455px;
+  width: 627.1115px;
+  height: 645.029px;
   z-index: 2;
   pointer-events: none;
 }
@@ -726,8 +726,8 @@ body {
 .welcome-content-wrapper {
   position: absolute;
   left: 0;
-  top: 1180px;
-  width: 750px;
+  top: 590px;
+  width: 375px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -738,10 +738,10 @@ body {
 .welcome-content {
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 24px;
   align-items: center;
   justify-content: flex-end;
-  padding: 0 0 48px 0;
+  padding: 0 0 24px 0;
   width: 100%;
 }
 
@@ -750,15 +750,15 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 80px;
+  padding: 0 40px;
   width: 100%;
 }
 
 .welcome-main-title {
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
-  font-size: 40px;
-  line-height: 56px;
+  font-size: 20px;
+  line-height: 28px;
   text-align: center;
   color: var(--bl-text-color-primary);
   white-space: pre-wrap;
@@ -770,7 +770,7 @@ body {
 .welcome-actions-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 16px;
   align-items: center;
   width: 100%;
 }
@@ -786,7 +786,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0 32px;
+  padding: 0 16px;
   width: 100%;
 }
 
@@ -801,18 +801,18 @@ body {
   background-color: var(--bl-brand-color-6);
   color: var(--bl-text-color-allwhite);
   border: none;
-  border-radius: 100px;
-  height: 96px;
-  width: 684px;
-  padding: 28px 48px;
+  border-radius: 50px;
+  height: 48px;
+  width: 342px;
+  padding: 14px 24px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
-  font-size: 32px;
-  line-height: 44px;
+  font-size: 16px;
+  line-height: 22px;
   text-align: center;
   transition: opacity 0.2s ease;
   overflow: hidden;
@@ -838,8 +838,8 @@ body {
 .welcome-login-text {
   font-family: 'Open Sans', 'Noto Sans JP', sans-serif;
   font-weight: 400;
-  font-size: 28px;
-  line-height: 40px;
+  font-size: 14px;
+  line-height: 20px;
   text-align: center;
   color: var(--bl-text-color-primary);
   white-space: nowrap;
@@ -870,24 +870,24 @@ body {
   position: relative;
   width: 100%;
   border: 1px solid var(--bl-border-color-standard);
-  border-radius: 12px;
-  padding: 24px 32px;
+  border-radius: 6px;
+  padding: 12px 16px;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
 }
 
 .search-input {
   flex: 1;
   border: none;
   outline: none;
-  font-size: 32px;
+  font-size: 16px;
   font-family: 'Open Sans', sans-serif;
   color: var(--bl-text-color-primary);
 }
 
 .search-icon {
-  font-size: 32px;
+  font-size: 16px;
   flex-shrink: 0;
 }
 
@@ -899,8 +899,8 @@ body {
 .country-item {
   display: flex;
   align-items: center;
-  gap: 24px;
-  padding: 24px 0;
+  gap: 12px;
+  padding: 12px 0;
   border-bottom: 1px solid #f0f0f0;
   cursor: pointer;
   transition: background-color 0.2s;
@@ -915,9 +915,9 @@ body {
 }
 
 .country-flag-item {
-  font-size: 48px;
-  width: 48px;
-  height: 48px;
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -963,18 +963,18 @@ body {
 
 .code-inputs {
   display: flex;
-  gap: 16px;
+  gap: 8px;
   justify-content: center;
-  margin-bottom: 32px;
+  margin-bottom: 16px;
 }
 
 .code-input {
-  width: 80px;
-  height: 96px;
+  width: 40px;
+  height: 48px;
   border: 2px solid var(--bl-border-color-standard);
-  border-radius: 12px;
+  border-radius: 6px;
   text-align: center;
-  font-size: 48px;
+  font-size: 24px;
   font-weight: 600;
   font-family: 'Open Sans', sans-serif;
   color: var(--bl-text-color-primary);
@@ -989,9 +989,9 @@ body {
 
 .resend-code {
   text-align: center;
-  font-size: 28px;
+  font-size: 14px;
   color: var(--bl-text-color-secondary);
-  margin-top: 24px;
+  margin-top: 12px;
 }
 
 .resend-code a {
@@ -1007,25 +1007,25 @@ body {
 /* Terms Page */
 .terms-content {
   width: 100%;
-  padding: 0 32px;
-  padding-bottom: 48px;
+  padding: 0 16px;
+  padding-bottom: 24px;
 }
 
 .terms-title {
-  font-size: 56px;
+  font-size: 28px;
   font-weight: 600;
   color: var(--bl-text-color-primary);
-  margin-bottom: 32px;
+  margin-bottom: 16px;
 }
 
 .terms-text {
-  font-size: 28px;
-  line-height: 44px;
+  font-size: 14px;
+  line-height: 22px;
   color: var(--bl-text-color-primary);
 }
 
 .terms-text p {
-  margin-bottom: 24px;
+  margin-bottom: 12px;
 }
 
 .terms-text u {
@@ -1039,32 +1039,32 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  padding: 48px 32px;
-  gap: 48px;
+  padding: 24px 16px;
+  gap: 24px;
 }
 
 .success-icon {
-  width: 120px;
-  height: 120px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   background-color: #10b981;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 80px;
+  font-size: 40px;
   font-weight: bold;
 }
 
 .success-title {
-  font-size: 56px;
+  font-size: 28px;
   font-weight: 600;
   color: var(--bl-text-color-primary);
   text-align: center;
 }
 
 .success-message {
-  font-size: 32px;
+  font-size: 16px;
   color: var(--bl-text-color-secondary);
   text-align: center;
 }
