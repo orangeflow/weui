@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>紅包 2025 H2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #fef2f2 0%, #fef9c3 50%, #fef2f2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .red-packet-card {
+            position: relative;
+            max-width: 400px;
+            margin: 40px auto;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(239, 68, 68, 0.3);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .red-packet-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 70px rgba(239, 68, 68, 0.4);
+        }
+
+        .red-packet-card.opening {
+            animation: pulse-glow 1s ease-in-out;
+        }
+
+        .red-packet-card.opened {
+            background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
+        }
+
+        .red-packet-card.expired {
+            background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+            opacity: 0.8;
+        }
+
+        /* Decorative Pattern */
+        .pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.1;
+        }
+
+        .pattern-circle {
+            position: absolute;
+            border: 2px solid #fde047;
+            border-radius: 50%;
+        }
+
+        .pattern-circle:nth-child(1) {
+            top: 20px;
+            left: 20px;
+            width: 64px;
+            height: 64px;
+        }
+
+        .pattern-circle:nth-child(2) {
+            top: 40px;
+            right: 40px;
+            width: 48px;
+            height: 48px;
+        }
+
+        .pattern-circle:nth-child(3) {
+            bottom: 30px;
+            left: 40px;
+            width: 40px;
+            height: 40px;
+        }
+
+        .pattern-circle:nth-child(4) {
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+        }
+
+        /* Content */
+        .packet-content {
+            position: relative;
+            padding: 48px 32px;
+            text-align: center;
+            color: white;
+            z-index: 1;
+        }
+
+        .packet-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            color: #fde047;
+        }
+
+        .packet-title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .packet-subtitle {
+            font-size: 20px;
+            margin-bottom: 32px;
+            opacity: 0.9;
+        }
+
+        .packet-sender {
+            margin-bottom: 32px;
+        }
+
+        .packet-sender-label {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 4px;
+        }
+
+        .packet-sender-name {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .packet-amount {
+            font-size: 56px;
+            font-weight: bold;
+            color: #fde047;
+            margin: 24px 0;
+        }
+
+        .packet-message {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-top: 16px;
+        }
+
+        .packet-button {
+            padding: 16px 48px;
+            border: none;
+            border-radius: 9999px;
+            font-size: 18px;
+            font-weight: bold;
+            background: #fde047;
+            color: #dc2626;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .packet-button:hover:not(:disabled) {
+            background: #facc15;
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .packet-button:active:not(:disabled) {
+            transform: scale(0.95);
+        }
+
+        .packet-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .expired-message {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .expired-subtitle {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* Animations */
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 20px 60px rgba(239, 68, 68, 0.3);
+            }
+            50% {
+                box-shadow: 0 20px 80px rgba(239, 68, 68, 0.6);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 16px;
+            color: #6b7280;
+        }
+
+        /* Red Packet List */
+        .packet-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .packet-list {
+                grid-template-columns: 1fr;
+            }
+
+            .red-packet-card {
+                max-width: 100%;
+            }
+
+            .packet-title {
+                font-size: 28px;
+            }
+
+            .packet-amount {
+                font-size: 48px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header fade-in">
+            <h1>我的紅包</h1>
+            <p>紅包 2025 H2</p>
+        </div>
+
+        <!-- Single Red Packet Card -->
+        <div class="red-packet-card fade-in" id="mainPacket">
+            <div class="pattern">
+                <div class="pattern-circle"></div>
+                <div class="pattern-circle"></div>
+                <div class="pattern-circle"></div>
+                <div class="pattern-circle"></div>
+            </div>
+            <div class="packet-content">
+                <div class="packet-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="4" y="6" width="16" height="12" rx="2" fill="currentColor" opacity="0.2"/>
+                        <path d="M4 8C4 7.44772 4.44772 7 5 7H19C19.5523 7 20 7.44772 20 8V18C20 18.5523 19.5523 19 19 19H5C4.44772 19 4 18.5523 4 18V8Z" 
+                              stroke="currentColor" stroke-width="2" fill="none"/>
+                        <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.5"/>
+                        <line x1="4" y1="13" x2="20" y2="13" stroke="currentColor" stroke-width="1.5"/>
+                        <text x="12" y="16" font-size="8" fill="currentColor" text-anchor="middle" font-weight="bold">福</text>
+                    </svg>
+                </div>
+                
+                <div id="unopenedContent">
+                    <h2 class="packet-title">恭喜發財</h2>
+                    <p class="packet-subtitle">大吉大利</p>
+                    <div class="packet-sender">
+                        <div class="packet-sender-label">來自</div>
+                        <div class="packet-sender-name">發送者</div>
+                    </div>
+                    <button class="packet-button" onclick="openPacket()">開紅包</button>
+                </div>
+
+                <div id="openedContent" style="display: none;">
+                    <div class="packet-sender-label">恭喜您獲得</div>
+                    <div class="packet-amount">¥88.88</div>
+                    <div class="packet-sender">
+                        <div class="packet-sender-label">來自</div>
+                        <div class="packet-sender-name">發送者</div>
+                    </div>
+                    <p class="packet-message">祝您新年快樂，萬事如意！</p>
+                </div>
+
+                <div id="expiredContent" style="display: none;">
+                    <h2 class="expired-message">紅包已過期</h2>
+                    <p class="expired-subtitle">此紅包已無法領取</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Red Packet List -->
+        <div class="packet-list">
+            <div class="red-packet-card fade-in">
+                <div class="pattern">
+                    <div class="pattern-circle"></div>
+                    <div class="pattern-circle"></div>
+                    <div class="pattern-circle"></div>
+                    <div class="pattern-circle"></div>
+                </div>
+                <div class="packet-content">
+                    <div class="packet-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="4" y="6" width="16" height="12" rx="2" fill="currentColor" opacity="0.2"/>
+                            <path d="M4 8C4 7.44772 4.44772 7 5 7H19C19.5523 7 20 7.44772 20 8V18C20 18.5523 19.5523 19 19 19H5C4.44772 19 4 18.5523 4 18V8Z" 
+                                  stroke="currentColor" stroke-width="2" fill="none"/>
+                            <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.5"/>
+                            <line x1="4" y1="13" x2="20" y2="13" stroke="currentColor" stroke-width="1.5"/>
+                            <text x="12" y="16" font-size="8" fill="currentColor" text-anchor="middle" font-weight="bold">福</text>
+                        </svg>
+                    </div>
+                    <h2 class="packet-title">恭喜發財</h2>
+                    <p class="packet-subtitle">大吉大利</p>
+                    <div class="packet-sender">
+                        <div class="packet-sender-label">來自</div>
+                        <div class="packet-sender-name">張三</div>
+                    </div>
+                    <button class="packet-button" onclick="openPacketById('packet1')">開紅包</button>
+                </div>
+            </div>
+
+            <div class="red-packet-card opened fade-in">
+                <div class="pattern">
+                    <div class="pattern-circle"></div>
+                    <div class="pattern-circle"></div>
+                    <div class="pattern-circle"></div>
+                    <div class="pattern-circle"></div>
+                </div>
+                <div class="packet-content">
+                    <div class="packet-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="4" y="6" width="16" height="12" rx="2" fill="currentColor" opacity="0.2"/>
+                            <path d="M4 8C4 7.44772 4.44772 7 5 7H19C19.5523 7 20 7.44772 20 8V18C20 18.5523 19.5523 19 19 19H5C4.44772 19 4 18.5523 4 18V8Z" 
+                                  stroke="currentColor" stroke-width="2" fill="none"/>
+                            <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.5"/>
+                            <line x1="4" y1="13" x2="20" y2="13" stroke="currentColor" stroke-width="1.5"/>
+                            <text x="12" y="16" font-size="8" fill="currentColor" text-anchor="middle" font-weight="bold">福</text>
+                        </svg>
+                    </div>
+                    <div class="packet-sender-label">恭喜您獲得</div>
+                    <div class="packet-amount">¥66.66</div>
+                    <div class="packet-sender">
+                        <div class="packet-sender-label">來自</div>
+                        <div class="packet-sender-name">李四</div>
+                    </div>
+                    <p class="packet-message">願您在新的一年裡心想事成！</p>
+                </div>
+            </div>
+
+            <div class="red-packet-card expired fade-in">
+                <div class="pattern">
+                    <div class="pattern-circle"></div>
+                    <div class="pattern-circle"></div>
+                    <div class="pattern-circle"></div>
+                    <div class="pattern-circle"></div>
+                </div>
+                <div class="packet-content">
+                    <div class="packet-icon" style="color: #9ca3af;">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="4" y="6" width="16" height="12" rx="2" fill="currentColor" opacity="0.2"/>
+                            <path d="M4 8C4 7.44772 4.44772 7 5 7H19C19.5523 7 20 7.44772 20 8V18C20 18.5523 19.5523 19 19 19H5C4.44772 19 4 18.5523 4 18V8Z" 
+                                  stroke="currentColor" stroke-width="2" fill="none"/>
+                            <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.5"/>
+                            <line x1="4" y1="13" x2="20" y2="13" stroke="currentColor" stroke-width="1.5"/>
+                            <text x="12" y="16" font-size="8" fill="currentColor" text-anchor="middle" font-weight="bold">福</text>
+                        </svg>
+                    </div>
+                    <h2 class="expired-message">紅包已過期</h2>
+                    <p class="expired-subtitle">此紅包已無法領取</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openPacket() {
+            const packet = document.getElementById('mainPacket');
+            const unopenedContent = document.getElementById('unopenedContent');
+            const openedContent = document.getElementById('openedContent');
+            const button = document.querySelector('#mainPacket .packet-button');
+
+            if (button.disabled) return;
+
+            // Disable button
+            button.disabled = true;
+            button.textContent = '開啟中...';
+            
+            // Add opening animation
+            packet.classList.add('opening');
+            packet.classList.add('shake');
+
+            // After animation, show opened content
+            setTimeout(() => {
+                packet.classList.remove('opening', 'shake');
+                packet.classList.add('opened');
+                unopenedContent.style.display = 'none';
+                openedContent.style.display = 'block';
+                openedContent.classList.add('fade-in');
+            }, 1000);
+        }
+
+        function openPacketById(packetId) {
+            console.log('Opening packet:', packetId);
+            // Similar logic can be implemented for list items
+            alert('開啟紅包: ' + packetId);
+        }
+
+        // Add fade-in animation on load
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.fade-in').forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
