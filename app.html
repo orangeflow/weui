@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web3 Wallet - 註冊/登錄流程</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- App Container -->
+  <div id="app" class="app-container">
+    
+    <!-- Page 1: 登錄/註冊首頁 -->
+    <div id="page-welcome" class="page active" data-page="welcome" data-name="登录注册页" data-node-id="1363:16374">
+      <div class="container welcome-container">
+        <!-- Status Bar -->
+        <div class="status-bar" data-name="StatusBar" data-node-id="1363:16390">
+          <div class="time-section" data-name="Time" data-node-id="I1363:16390;252:5762">
+            <p class="time-text" data-node-id="I1363:16390;252:5763">9:00</p>
+          </div>
+          <div class="levels-section" data-name="Levels" data-node-id="I1363:16390;252:5764">
+            <img src="https://www.figma.com/api/mcp/asset/4f10733b-52f4-4c9c-a615-39942be8d1ec" alt="Status" class="status-icon">
+          </div>
+        </div>
+
+        <!-- Background Decoration -->
+        <div class="welcome-background" data-node-id="1363:16386"></div>
+        <div class="welcome-shape" data-name="Subtract" data-node-id="1363:16387">
+          <img src="https://www.figma.com/api/mcp/asset/3208651a-7208-4ee6-aaad-81e673956719" alt="Shape" class="shape-image">
+        </div>
+
+        <!-- Main Content -->
+        <div class="welcome-content-wrapper" data-node-id="1363:16375">
+          <div class="welcome-content" data-node-id="1363:16376">
+            <!-- Title Section -->
+            <div class="welcome-text-container" data-name="Text container" data-node-id="1363:16377">
+              <h1 class="welcome-main-title" data-node-id="1363:16378">BLink-connecting people and crypto in an instant</h1>
+            </div>
+
+            <!-- Actions Section -->
+            <div class="welcome-actions-wrapper" data-node-id="1363:16379">
+              <div class="welcome-button-container" data-node-id="1363:16380">
+                <div class="welcome-button-wrapper" data-node-id="1363:16381">
+                  <div class="welcome-button-inner" data-node-id="1363:16382">
+                    <button class="welcome-signup-button" id="signupBtn" data-name="button" data-node-id="1363:16383">
+                      <span data-node-id="I1363:16383;814:9711">Sign Up</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <p class="welcome-login-text" data-node-id="1363:16384">
+                <span>Have an account？</span>
+                <a href="#" id="loginLinkBtn" class="login-link">Log in</a>
+              </p>
+            </div>
+          </div>
+
+          <!-- Home Indicator -->
+          <div class="home-indicator" data-name="HomeIndicator" data-node-id="1363:16385">
+            <div class="home-indicator-bar" data-name="矩形" data-node-id="I1363:16385;331:2764"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page 2: 輸入手機號（註冊） -->
+    <div id="page-phone-signup" class="page" data-page="phone-signup">
+      <div class="container">
+        <div class="home-indicator">
+          <div class="home-indicator-bar"></div>
+        </div>
+
+        <div class="main-content">
+          <div class="content-wrapper">
+            <div class="header-section">
+              <div class="status-bar">
+                <div class="time-section">
+                  <p class="time-text">9:00</p>
+                </div>
+                <div class="levels-section">
+                  <div class="status-icon-placeholder"></div>
+                </div>
+              </div>
+
+              <div class="nav-bar">
+                <button class="back-button" data-back="welcome">
+                  <div class="arrow-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M15 18L9 12L15 6" stroke="rgba(0, 0, 0, 1)" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                </button>
+                <div class="nav-spacer"></div>
+              </div>
+            </div>
+
+            <div class="content-section">
+              <div class="welcome-section">
+                <div class="welcome-text-section">
+                  <h1 class="welcome-title">Welcome</h1>
+                  <p class="welcome-subtitle">Enter and verify your phone number for your account security</p>
+                </div>
+
+                <div class="phone-input-section">
+                  <label class="input-label">Phone number</label>
+                  <div class="phone-input-container">
+                    <div class="phone-input-content">
+                      <div class="country-selector">
+                        <div class="country-flag-wrapper">
+                          <div class="country-flag" id="countrySelector">
+                            <div class="flag-icon">🇨🇳</div>
+                            <span class="country-code">+086</span>
+                          </div>
+                        </div>
+                        <div class="divider-vertical"></div>
+                        <input 
+                          type="tel" 
+                          inputmode="numeric"
+                          pattern="[0-9]*"
+                          class="phone-input" 
+                          id="phoneInputSignup"
+                          placeholder="185 7550 3480" 
+                          maxlength="13"
+                        >
+                      </div>
+                      <button class="clear-button" id="clearBtnSignup" style="display: none;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                          <circle cx="12" cy="12" r="10" fill="rgba(0, 0, 0, 0.6)"/>
+                          <path d="M15 9L9 15M9 9L15 15" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="action-section">
+                <div class="agreement-section">
+                  <label class="checkbox-wrapper">
+                    <input type="checkbox" class="agreement-checkbox" id="agreementCheckboxSignup">
+                    <span class="checkbox-custom"></span>
+                  </label>
+                  <p class="agreement-text">
+                    I have read and agree to <a href="#" class="agreement-link" id="termsLink">SpaceLink's Terms of Service.</a>
+                  </p>
+                </div>
+
+                <div class="button-section">
+                  <div class="button-wrapper">
+                    <button class="primary-button" id="createAccountBtn">
+                      <span>Create account</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page 3: 輸入手機號（登錄） -->
+    <div id="page-phone-login" class="page" data-page="phone-login">
+      <div class="container">
+        <div class="home-indicator">
+          <div class="home-indicator-bar"></div>
+        </div>
+
+        <div class="main-content">
+          <div class="content-wrapper">
+            <div class="header-section">
+              <div class="status-bar">
+                <div class="time-section">
+                  <p class="time-text">9:00</p>
+                </div>
+                <div class="levels-section">
+                  <div class="status-icon-placeholder"></div>
+                </div>
+              </div>
+
+              <div class="nav-bar">
+                <button class="back-button" data-back="welcome">
+                  <div class="arrow-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M15 18L9 12L15 6" stroke="rgba(0, 0, 0, 1)" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                </button>
+                <div class="nav-spacer"></div>
+              </div>
+            </div>
+
+            <div class="content-section">
+              <div class="welcome-section">
+                <div class="welcome-text-section">
+                  <h1 class="welcome-title">Welcome back</h1>
+                  <p class="welcome-subtitle">Enter and verify your phone number for your account security</p>
+                </div>
+
+                <div class="phone-input-section">
+                  <label class="input-label">Phone number</label>
+                  <div class="phone-input-container">
+                    <div class="phone-input-content">
+                      <div class="country-selector">
+                        <div class="country-flag-wrapper">
+                          <div class="country-flag" id="countrySelectorLogin">
+                            <div class="flag-icon">🇨🇳</div>
+                            <span class="country-code">+086</span>
+                          </div>
+                        </div>
+                        <div class="divider-vertical"></div>
+                        <input 
+                          type="tel" 
+                          inputmode="numeric"
+                          pattern="[0-9]*"
+                          class="phone-input" 
+                          id="phoneInputLogin"
+                          placeholder="185 7550 3480" 
+                          maxlength="13"
+                        >
+                      </div>
+                      <button class="clear-button" id="clearBtnLogin" style="display: none;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                          <circle cx="12" cy="12" r="10" fill="rgba(0, 0, 0, 0.6)"/>
+                          <path d="M15 9L9 15M9 9L15 15" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="action-section">
+                <div class="button-section">
+                  <div class="button-wrapper">
+                    <button class="primary-button" id="loginBtn">
+                      <span>Log in</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page 4: 國家選擇 -->
+    <div id="page-country-select" class="page" data-page="country-select">
+      <div class="container">
+        <div class="home-indicator">
+          <div class="home-indicator-bar"></div>
+        </div>
+
+        <div class="main-content">
+          <div class="content-wrapper">
+            <div class="header-section">
+              <div class="status-bar">
+                <div class="time-section">
+                  <p class="time-text">9:00</p>
+                </div>
+                <div class="levels-section">
+                  <div class="status-icon-placeholder"></div>
+                </div>
+              </div>
+
+              <div class="nav-bar">
+                <button class="back-button" data-back="phone-signup">
+                  <div class="arrow-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M15 18L9 12L15 6" stroke="rgba(0, 0, 0, 1)" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                </button>
+                <div class="nav-spacer"></div>
+              </div>
+            </div>
+
+            <div class="content-section">
+              <div class="search-section">
+                <div class="search-input-container">
+                  <input 
+                    type="text" 
+                    class="search-input" 
+                    id="countrySearchInput"
+                    placeholder="Search country"
+                  >
+                  <div class="search-icon">🔍</div>
+                </div>
+              </div>
+
+              <div class="country-list" id="countryList">
+                <div class="country-item" data-code="+086" data-flag="🇨🇳">
+                  <div class="country-flag-item">🇨🇳</div>
+                  <div class="country-info">
+                    <div class="country-name">China</div>
+                    <div class="country-code-item">+086</div>
+                  </div>
+                </div>
+                <div class="country-item" data-code="+001" data-flag="🇺🇸">
+                  <div class="country-flag-item">🇺🇸</div>
+                  <div class="country-info">
+                    <div class="country-name">United States</div>
+                    <div class="country-code-item">+001</div>
+                  </div>
+                </div>
+                <div class="country-item" data-code="+044" data-flag="🇬🇧">
+                  <div class="country-flag-item">🇬🇧</div>
+                  <div class="country-info">
+                    <div class="country-name">United Kingdom</div>
+                    <div class="country-code-item">+044</div>
+                  </div>
+                </div>
+                <div class="country-item" data-code="+081" data-flag="🇯🇵">
+                  <div class="country-flag-item">🇯🇵</div>
+                  <div class="country-info">
+                    <div class="country-name">Japan</div>
+                    <div class="country-code-item">+081</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="empty-state" id="emptyState" style="display: none;">
+                <p>There's nothing here...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page 5: 輸入驗證碼 -->
+    <div id="page-verify-code" class="page" data-page="verify-code">
+      <div class="container">
+        <div class="home-indicator">
+          <div class="home-indicator-bar"></div>
+        </div>
+
+        <div class="main-content">
+          <div class="content-wrapper">
+            <div class="header-section">
+              <div class="status-bar">
+                <div class="time-section">
+                  <p class="time-text">9:00</p>
+                </div>
+                <div class="levels-section">
+                  <div class="status-icon-placeholder"></div>
+                </div>
+              </div>
+
+              <div class="nav-bar">
+                <button class="back-button" data-back="phone-signup">
+                  <div class="arrow-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M15 18L9 12L15 6" stroke="rgba(0, 0, 0, 1)" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                </button>
+                <div class="nav-spacer"></div>
+              </div>
+            </div>
+
+            <div class="content-section">
+              <div class="welcome-section">
+                <div class="welcome-text-section">
+                  <h1 class="welcome-title">Enter your phone code</h1>
+                  <p class="welcome-subtitle" id="codePhoneNumber">We've sent the code to +18575503480</p>
+                </div>
+
+                <div class="verification-code-section">
+                  <div class="code-inputs" id="codeInputs">
+                    <input type="text" inputmode="numeric" pattern="[0-9]*" class="code-input" maxlength="1" data-index="0">
+                    <input type="text" inputmode="numeric" pattern="[0-9]*" class="code-input" maxlength="1" data-index="1">
+                    <input type="text" inputmode="numeric" pattern="[0-9]*" class="code-input" maxlength="1" data-index="2">
+                    <input type="text" inputmode="numeric" pattern="[0-9]*" class="code-input" maxlength="1" data-index="3">
+                    <input type="text" inputmode="numeric" pattern="[0-9]*" class="code-input" maxlength="1" data-index="4">
+                    <input type="text" inputmode="numeric" pattern="[0-9]*" class="code-input" maxlength="1" data-index="5">
+                  </div>
+                  <p class="resend-code" id="resendCodeLink" style="display: none;">
+                    Didn't receive code? <a href="#" id="resendBtn">Resend</a>
+                  </p>
+                </div>
+              </div>
+
+              <div class="action-section">
+                <div class="button-section">
+                  <div class="button-wrapper">
+                    <button class="primary-button" id="verifyCodeBtn" disabled>
+                      <span>Verify</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page 6: 協議頁面 -->
+    <div id="page-terms" class="page" data-page="terms">
+      <div class="container">
+        <div class="home-indicator">
+          <div class="home-indicator-bar"></div>
+        </div>
+
+        <div class="main-content">
+          <div class="content-wrapper">
+            <div class="header-section">
+              <div class="status-bar">
+                <div class="time-section">
+                  <p class="time-text">9:00</p>
+                </div>
+                <div class="levels-section">
+                  <div class="status-icon-placeholder"></div>
+                </div>
+              </div>
+
+              <div class="nav-bar">
+                <button class="back-button" data-back="phone-signup">
+                  <div class="arrow-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M15 18L9 12L15 6" stroke="rgba(0, 0, 0, 1)" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                </button>
+                <div class="nav-spacer"></div>
+              </div>
+            </div>
+
+            <div class="content-section">
+              <div class="terms-content">
+                <h1 class="terms-title">Privacy Notice</h1>
+                <div class="terms-text">
+                  <p>Thank you for visiting <u>Blink.com</u>. The relevant Blink entity (referred to below) as a/the data controller, provides this Privacy Notice Statement to describe our practices regarding the collection, storage, use, disclosure and other processing of Personal Data (defined below).</p>
+                  <p>By visiting, accessing, or using <u>Blink.com</u> and associated application program interfaces or mobile applications (the "Blink Platform"), you (a) acknowledge that you have the right, capacity and authority to accept this Privacy Notice Statement (the "Privacy Notice"); (b) acknowledge that you have read and understand this Privacy Notice and (c) consent to the policies and practices outlined in this Privacy Notice.</p>
+                  <p>So please read them carefully to understand what we do. This Privacy Notice explains what data we collect, why we collect it, how such data is used and stored, how such data may be shared by us, rights you may have.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page 7: 註冊成功 -->
+    <div id="page-success" class="page" data-page="success">
+      <div class="container">
+        <div class="home-indicator">
+          <div class="home-indicator-bar"></div>
+        </div>
+
+        <div class="main-content">
+          <div class="content-wrapper">
+            <div class="success-content">
+              <div class="success-icon">✓</div>
+              <h1 class="success-title">Registration Successful!</h1>
+              <p class="success-message">Your account has been created successfully.</p>
+              <button class="primary-button" id="goToHomeBtn">
+                <span>Go to Home</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: 賬戶已存在 -->
+    <div class="modal-container" id="accountExistsModal" style="display: none;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="modal-close-button" id="closeModalBtn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M18 6L6 18M6 6L18 18" stroke="rgba(0, 0, 0, 1)" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-text-section">
+            <h2 class="modal-title">Account already exists</h2>
+            <p class="modal-description">The account you entered already exists. You can log in now.</p>
+            <div class="modal-button-wrapper">
+              <button class="modal-button" id="loginNowBtn">
+                <span>Log in now</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="home-indicator">
+        <div class="home-indicator-bar"></div>
+      </div>
+    </div>
+
+    <!-- Mask Overlay -->
+    <div class="mask-overlay" id="maskOverlay" style="display: none;"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+

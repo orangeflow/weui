@@ -1,454 +1,148 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>紅包 2025 H2</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-            background: linear-gradient(135deg, #fef2f2 0%, #fef9c3 50%, #fef2f2 100%);
-            min-height: 100vh;
-            padding: 20px;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .red-packet-card {
-            position: relative;
-            max-width: 400px;
-            margin: 40px auto;
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-            border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(239, 68, 68, 0.3);
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .red-packet-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 70px rgba(239, 68, 68, 0.4);
-        }
-
-        .red-packet-card.opening {
-            animation: pulse-glow 1s ease-in-out;
-        }
-
-        .red-packet-card.opened {
-            background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
-        }
-
-        .red-packet-card.expired {
-            background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
-            opacity: 0.8;
-        }
-
-        /* Decorative Pattern */
-        .pattern {
-            position: absolute;
-            inset: 0;
-            opacity: 0.1;
-        }
-
-        .pattern-circle {
-            position: absolute;
-            border: 2px solid #fde047;
-            border-radius: 50%;
-        }
-
-        .pattern-circle:nth-child(1) {
-            top: 20px;
-            left: 20px;
-            width: 64px;
-            height: 64px;
-        }
-
-        .pattern-circle:nth-child(2) {
-            top: 40px;
-            right: 40px;
-            width: 48px;
-            height: 48px;
-        }
-
-        .pattern-circle:nth-child(3) {
-            bottom: 30px;
-            left: 40px;
-            width: 40px;
-            height: 40px;
-        }
-
-        .pattern-circle:nth-child(4) {
-            bottom: 20px;
-            right: 20px;
-            width: 56px;
-            height: 56px;
-        }
-
-        /* Content */
-        .packet-content {
-            position: relative;
-            padding: 48px 32px;
-            text-align: center;
-            color: white;
-            z-index: 1;
-        }
-
-        .packet-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 24px;
-            color: #fde047;
-        }
-
-        .packet-title {
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        .packet-subtitle {
-            font-size: 20px;
-            margin-bottom: 32px;
-            opacity: 0.9;
-        }
-
-        .packet-sender {
-            margin-bottom: 32px;
-        }
-
-        .packet-sender-label {
-            font-size: 14px;
-            opacity: 0.8;
-            margin-bottom: 4px;
-        }
-
-        .packet-sender-name {
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        .packet-amount {
-            font-size: 56px;
-            font-weight: bold;
-            color: #fde047;
-            margin: 24px 0;
-        }
-
-        .packet-message {
-            font-size: 14px;
-            opacity: 0.9;
-            margin-top: 16px;
-        }
-
-        .packet-button {
-            padding: 16px 48px;
-            border: none;
-            border-radius: 9999px;
-            font-size: 18px;
-            font-weight: bold;
-            background: #fde047;
-            color: #dc2626;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .packet-button:hover:not(:disabled) {
-            background: #facc15;
-            transform: scale(1.05);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        .packet-button:active:not(:disabled) {
-            transform: scale(0.95);
-        }
-
-        .packet-button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .expired-message {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        .expired-subtitle {
-            font-size: 14px;
-            opacity: 0.8;
-        }
-
-        /* Animations */
-        @keyframes pulse-glow {
-            0%, 100% {
-                box-shadow: 0 20px 60px rgba(239, 68, 68, 0.3);
-            }
-            50% {
-                box-shadow: 0 20px 80px rgba(239, 68, 68, 0.6);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-        }
-
-        .fade-in {
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        .shake {
-            animation: shake 0.5s ease-in-out;
-        }
-
-        /* Header */
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .header h1 {
-            font-size: 36px;
-            font-weight: bold;
-            color: #1f2937;
-            margin-bottom: 8px;
-        }
-
-        .header p {
-            font-size: 16px;
-            color: #6b7280;
-        }
-
-        /* Red Packet List */
-        .packet-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 32px;
-            margin-top: 60px;
-        }
-
-        @media (max-width: 768px) {
-            .packet-list {
-                grid-template-columns: 1fr;
-            }
-
-            .red-packet-card {
-                max-width: 100%;
-            }
-
-            .packet-title {
-                font-size: 28px;
-            }
-
-            .packet-amount {
-                font-size: 48px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>輸入手機號 - Web3 Wallet</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <div class="header fade-in">
-            <h1>我的紅包</h1>
-            <p>紅包 2025 H2</p>
-        </div>
-
-        <!-- Single Red Packet Card -->
-        <div class="red-packet-card fade-in" id="mainPacket">
-            <div class="pattern">
-                <div class="pattern-circle"></div>
-                <div class="pattern-circle"></div>
-                <div class="pattern-circle"></div>
-                <div class="pattern-circle"></div>
-            </div>
-            <div class="packet-content">
-                <div class="packet-icon">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="4" y="6" width="16" height="12" rx="2" fill="currentColor" opacity="0.2"/>
-                        <path d="M4 8C4 7.44772 4.44772 7 5 7H19C19.5523 7 20 7.44772 20 8V18C20 18.5523 19.5523 19 19 19H5C4.44772 19 4 18.5523 4 18V8Z" 
-                              stroke="currentColor" stroke-width="2" fill="none"/>
-                        <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.5"/>
-                        <line x1="4" y1="13" x2="20" y2="13" stroke="currentColor" stroke-width="1.5"/>
-                        <text x="12" y="16" font-size="8" fill="currentColor" text-anchor="middle" font-weight="bold">福</text>
-                    </svg>
-                </div>
-                
-                <div id="unopenedContent">
-                    <h2 class="packet-title">恭喜發財</h2>
-                    <p class="packet-subtitle">大吉大利</p>
-                    <div class="packet-sender">
-                        <div class="packet-sender-label">來自</div>
-                        <div class="packet-sender-name">發送者</div>
-                    </div>
-                    <button class="packet-button" onclick="openPacket()">開紅包</button>
-                </div>
-
-                <div id="openedContent" style="display: none;">
-                    <div class="packet-sender-label">恭喜您獲得</div>
-                    <div class="packet-amount">¥88.88</div>
-                    <div class="packet-sender">
-                        <div class="packet-sender-label">來自</div>
-                        <div class="packet-sender-name">發送者</div>
-                    </div>
-                    <p class="packet-message">祝您新年快樂，萬事如意！</p>
-                </div>
-
-                <div id="expiredContent" style="display: none;">
-                    <h2 class="expired-message">紅包已過期</h2>
-                    <p class="expired-subtitle">此紅包已無法領取</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Red Packet List -->
-        <div class="packet-list">
-            <div class="red-packet-card fade-in">
-                <div class="pattern">
-                    <div class="pattern-circle"></div>
-                    <div class="pattern-circle"></div>
-                    <div class="pattern-circle"></div>
-                    <div class="pattern-circle"></div>
-                </div>
-                <div class="packet-content">
-                    <div class="packet-icon">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="4" y="6" width="16" height="12" rx="2" fill="currentColor" opacity="0.2"/>
-                            <path d="M4 8C4 7.44772 4.44772 7 5 7H19C19.5523 7 20 7.44772 20 8V18C20 18.5523 19.5523 19 19 19H5C4.44772 19 4 18.5523 4 18V8Z" 
-                                  stroke="currentColor" stroke-width="2" fill="none"/>
-                            <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.5"/>
-                            <line x1="4" y1="13" x2="20" y2="13" stroke="currentColor" stroke-width="1.5"/>
-                            <text x="12" y="16" font-size="8" fill="currentColor" text-anchor="middle" font-weight="bold">福</text>
-                        </svg>
-                    </div>
-                    <h2 class="packet-title">恭喜發財</h2>
-                    <p class="packet-subtitle">大吉大利</p>
-                    <div class="packet-sender">
-                        <div class="packet-sender-label">來自</div>
-                        <div class="packet-sender-name">張三</div>
-                    </div>
-                    <button class="packet-button" onclick="openPacketById('packet1')">開紅包</button>
-                </div>
-            </div>
-
-            <div class="red-packet-card opened fade-in">
-                <div class="pattern">
-                    <div class="pattern-circle"></div>
-                    <div class="pattern-circle"></div>
-                    <div class="pattern-circle"></div>
-                    <div class="pattern-circle"></div>
-                </div>
-                <div class="packet-content">
-                    <div class="packet-icon">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="4" y="6" width="16" height="12" rx="2" fill="currentColor" opacity="0.2"/>
-                            <path d="M4 8C4 7.44772 4.44772 7 5 7H19C19.5523 7 20 7.44772 20 8V18C20 18.5523 19.5523 19 19 19H5C4.44772 19 4 18.5523 4 18V8Z" 
-                                  stroke="currentColor" stroke-width="2" fill="none"/>
-                            <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.5"/>
-                            <line x1="4" y1="13" x2="20" y2="13" stroke="currentColor" stroke-width="1.5"/>
-                            <text x="12" y="16" font-size="8" fill="currentColor" text-anchor="middle" font-weight="bold">福</text>
-                        </svg>
-                    </div>
-                    <div class="packet-sender-label">恭喜您獲得</div>
-                    <div class="packet-amount">¥66.66</div>
-                    <div class="packet-sender">
-                        <div class="packet-sender-label">來自</div>
-                        <div class="packet-sender-name">李四</div>
-                    </div>
-                    <p class="packet-message">願您在新的一年裡心想事成！</p>
-                </div>
-            </div>
-
-            <div class="red-packet-card expired fade-in">
-                <div class="pattern">
-                    <div class="pattern-circle"></div>
-                    <div class="pattern-circle"></div>
-                    <div class="pattern-circle"></div>
-                    <div class="pattern-circle"></div>
-                </div>
-                <div class="packet-content">
-                    <div class="packet-icon" style="color: #9ca3af;">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="4" y="6" width="16" height="12" rx="2" fill="currentColor" opacity="0.2"/>
-                            <path d="M4 8C4 7.44772 4.44772 7 5 7H19C19.5523 7 20 7.44772 20 8V18C20 18.5523 19.5523 19 19 19H5C4.44772 19 4 18.5523 4 18V8Z" 
-                                  stroke="currentColor" stroke-width="2" fill="none"/>
-                            <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.5"/>
-                            <line x1="4" y1="13" x2="20" y2="13" stroke="currentColor" stroke-width="1.5"/>
-                            <text x="12" y="16" font-size="8" fill="currentColor" text-anchor="middle" font-weight="bold">福</text>
-                        </svg>
-                    </div>
-                    <h2 class="expired-message">紅包已過期</h2>
-                    <p class="expired-subtitle">此紅包已無法領取</p>
-                </div>
-            </div>
-        </div>
+  <div class="container" data-name="输入手机号" data-node-id="1363:16656">
+    <!-- Home Indicator -->
+    <div class="home-indicator" data-name="HomeIndicator" data-node-id="1363:16657">
+      <div class="home-indicator-bar"></div>
     </div>
 
-    <script>
-        function openPacket() {
-            const packet = document.getElementById('mainPacket');
-            const unopenedContent = document.getElementById('unopenedContent');
-            const openedContent = document.getElementById('openedContent');
-            const button = document.querySelector('#mainPacket .packet-button');
+    <!-- Main Content -->
+    <div class="main-content" data-node-id="1363:16658">
+      <div class="content-wrapper" data-node-id="1363:16659">
+        <!-- Header Section -->
+        <div class="header-section" data-node-id="1363:16660">
+          <!-- Status Bar -->
+          <div class="status-bar" data-name="StatusBar" data-node-id="1363:16661">
+            <div class="time-section">
+              <p class="time-text">9:00</p>
+            </div>
+            <div class="levels-section">
+              <img src="https://www.figma.com/api/mcp/asset/e831f2d1-5412-488b-9d02-f16b6eaec5fc" alt="Status" class="status-icon">
+            </div>
+          </div>
 
-            if (button.disabled) return;
+          <!-- Navigation Bar -->
+          <div class="nav-bar" data-name="nav" data-node-id="1363:16662">
+            <button class="back-button" id="backBtn" data-name="chevron_back">
+              <div class="arrow-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M15 18L9 12L15 6" stroke="rgba(0, 0, 0, 1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </button>
+            <div class="nav-spacer"></div>
+          </div>
+        </div>
 
-            // Disable button
-            button.disabled = true;
-            button.textContent = '開啟中...';
-            
-            // Add opening animation
-            packet.classList.add('opening');
-            packet.classList.add('shake');
+        <!-- Content Section -->
+        <div class="content-section" data-node-id="1363:16663">
+          <!-- Welcome Section -->
+          <div class="welcome-section" data-node-id="1363:16664">
+            <div class="welcome-text-section" data-node-id="1363:16665">
+              <h1 class="welcome-title" data-node-id="1363:16666">Welcome</h1>
+              <p class="welcome-subtitle" data-node-id="1363:16667">Enter and verify your phone unmber for your account security</p>
+            </div>
 
-            // After animation, show opened content
-            setTimeout(() => {
-                packet.classList.remove('opening', 'shake');
-                packet.classList.add('opened');
-                unopenedContent.style.display = 'none';
-                openedContent.style.display = 'block';
-                openedContent.classList.add('fade-in');
-            }, 1000);
-        }
+            <!-- Phone Input Section -->
+            <div class="phone-input-section" data-name="输入" data-node-id="1363:16668">
+              <label class="input-label" data-node-id="I1363:16668;557:3800">Phone number</label>
+              <div class="phone-input-container" data-node-id="I1363:16668;557:3801">
+                <div class="phone-input-content" data-node-id="I1363:16668;557:3802">
+                  <div class="country-selector" data-node-id="I1363:16668;557:3803">
+                    <div class="country-flag-wrapper" data-node-id="I1363:16668;557:3804">
+                      <div class="country-flag" data-name="country" data-node-id="I1363:16668;557:3805">
+                        <img src="https://www.figma.com/api/mcp/asset/2051b26e-85e7-4878-b17c-644e8bf0a1d2" alt="China Flag" class="flag-image">
+                      </div>
+                      <span class="country-code" data-node-id="I1363:16668;557:3809">+086</span>
+                    </div>
+                    <div class="divider-vertical"></div>
+                    <input 
+                      type="tel" 
+                      class="phone-input" 
+                      id="phoneInput"
+                      placeholder="185 7550 3480" 
+                      value="185 7550 3480"
+                      data-node-id="I1363:16668;557:3811"
+                    >
+                  </div>
+                  <button class="clear-button" id="clearBtn" data-name="close-circle-filled" data-node-id="I1363:16668;557:3812" style="display: none;">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="24" cy="24" r="24" fill="rgba(0, 0, 0, 1)"/>
+                      <path d="M30 18L18 30M18 18L30 30" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
 
-        function openPacketById(packetId) {
-            console.log('Opening packet:', packetId);
-            // Similar logic can be implemented for list items
-            alert('開啟紅包: ' + packetId);
-        }
+          <!-- Agreement and Button Section -->
+          <div class="action-section" data-node-id="1363:16669">
+            <!-- Agreement Checkbox -->
+            <div class="agreement-section" data-name="协议" data-node-id="1363:16670">
+              <label class="checkbox-wrapper" data-node-id="I1363:16670;555:3793">
+                <input type="checkbox" class="agreement-checkbox" id="agreementCheckbox" data-name="checkbox" data-node-id="I1363:16670;557:3669">
+                <span class="checkbox-custom"></span>
+              </label>
+              <p class="agreement-text" data-node-id="I1363:16670;555:3795">
+                I have read and agree to <span class="agreement-link">SpaceLink's Terms of Service.</span>
+              </p>
+            </div>
 
-        // Add fade-in animation on load
-        window.addEventListener('load', () => {
-            document.querySelectorAll('.fade-in').forEach((el, index) => {
-                setTimeout(() => {
-                    el.style.opacity = '1';
-                }, index * 100);
-            });
-        });
-    </script>
+            <!-- Create Account Button -->
+            <div class="button-section" data-node-id="1363:16671">
+              <div class="button-wrapper" data-node-id="1363:16672">
+                <button class="primary-button" id="createAccountBtn" data-name="button/大按钮/primary/default" data-node-id="1363:16673">
+                  <span data-node-id="I1363:16673;495:3471">Create account</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mask Overlay -->
+    <div class="mask-overlay" data-name="mask" data-node-id="1363:16682" id="maskOverlay" style="display: none;"></div>
+
+    <!-- Modal: Account Already Exists -->
+    <div class="modal-container" data-node-id="1363:16683" id="accountExistsModal" style="display: none;">
+      <div class="modal-content" data-node-id="I1363:16683;880:11378">
+        <div class="modal-header" data-node-id="I1363:16683;880:11398">
+          <button class="modal-close-button" id="closeModalBtn" data-node-id="I1363:16683;880:11399">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 6L6 18M6 6L18 18" stroke="rgba(0, 0, 0, 1)" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body" data-node-id="I1363:16683;880:11381">
+          <div class="modal-text-section" data-node-id="I1363:16683;880:11382">
+            <h2 class="modal-title" data-node-id="I1363:16683;880:11384">Account already exists</h2>
+            <p class="modal-description" data-node-id="I1363:16683;880:11386">The account you entered already exists. You can log in now.</p>
+            <div class="modal-button-wrapper" data-node-id="I1363:16683;880:11387">
+              <button class="modal-button" id="loginNowBtn" data-name="button" data-node-id="I1363:16683;880:11388">
+                <span data-node-id="I1363:16683;880:11388;814:9711">Log in now</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="home-indicator" data-name="HomeIndicator" data-node-id="I1363:16683;880:11389">
+        <div class="home-indicator-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>

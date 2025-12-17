@@ -40,21 +40,35 @@ function initWelcomePage() {
   const signupBtn = document.getElementById('signupBtn');
   const loginLinkBtn = document.getElementById('loginLinkBtn');
   
+  console.log('Initializing welcome page...');
+  console.log('signupBtn:', signupBtn);
+  console.log('loginLinkBtn:', loginLinkBtn);
+  
   if (signupBtn) {
+    // Remove any existing event listeners by cloning the button
+    const newSignupBtn = signupBtn.cloneNode(true);
+    signupBtn.parentNode.replaceChild(newSignupBtn, signupBtn);
+    const signupBtnRef = document.getElementById('signupBtn');
+    
     // Use event delegation to handle clicks on button and its children
-    signupBtn.addEventListener('click', function(e) {
+    signupBtnRef.addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
-      console.log('Signup button clicked', e.target);
+      console.log('Signup button clicked', e.target, e.currentTarget);
       AppState.isSignup = true;
       showPage('phone-signup');
     });
     
     // Also handle click on the span inside
-    const span = signupBtn.querySelector('span');
+    const span = signupBtnRef.querySelector('span');
     if (span) {
       span.style.pointerEvents = 'none'; // Let clicks pass through to button
     }
+    
+    // Ensure button is clickable
+    signupBtnRef.style.pointerEvents = 'auto';
+    signupBtnRef.style.position = 'relative';
+    signupBtnRef.style.zIndex = '10';
   } else {
     console.error('signupBtn not found');
   }
@@ -62,10 +76,16 @@ function initWelcomePage() {
   if (loginLinkBtn) {
     loginLinkBtn.addEventListener('click', function(e) {
       e.preventDefault();
-      console.log('Login link clicked');
+      e.stopPropagation();
+      console.log('Login link clicked', e.target);
       AppState.isSignup = false;
       showPage('phone-login');
     });
+    
+    // Ensure link is clickable
+    loginLinkBtn.style.pointerEvents = 'auto';
+    loginLinkBtn.style.position = 'relative';
+    loginLinkBtn.style.zIndex = '10';
   } else {
     console.error('loginLinkBtn not found');
   }
@@ -85,53 +105,95 @@ function formatPhoneNumber(value) {
 }
 
 // Phone Input - Signup
-const phoneInputSignup = document.getElementById('phoneInputSignup');
-const clearBtnSignup = document.getElementById('clearBtnSignup');
-const agreementCheckboxSignup = document.getElementById('agreementCheckboxSignup');
-const createAccountBtn = document.getElementById('createAccountBtn');
+// DOM elements will be accessed in DOMContentLoaded
+let phoneInputSignup, clearBtnSignup, agreementCheckboxSignup, createAccountBtn;
 
-if (phoneInputSignup) {
+function initPhoneInputSignup() {
+  phoneInputSignup = document.getElementById('phoneInputSignup');
+  clearBtnSignup = document.getElementById('clearBtnSignup');
+  agreementCheckboxSignup = document.getElementById('agreementCheckboxSignup');
+  createAccountBtn = document.getElementById('createAccountBtn');
+
+  if (phoneInputSignup) {
   phoneInputSignup.addEventListener('input', function(e) {
     const formatted = formatPhoneNumber(e.target.value);
     e.target.value = formatted;
     AppState.phoneNumber = formatted.replace(/\s/g, '');
     
     // Show/hide clear button
-    if (formatted.trim().length > 0) {
-      clearBtnSignup.style.display = 'flex';
-    } else {
-      clearBtnSignup.style.display = 'none';
+    if (clearBtnSignup) {
+      if (formatted.trim().length > 0) {
+        clearBtnSignup.style.display = 'flex';
+      } else {
+        clearBtnSignup.style.display = 'none';
+      }
     }
     
     updateCreateAccountButton();
   });
 
   phoneInputSignup.addEventListener('focus', function() {
-    this.parentElement.parentElement.style.borderColor = '#165dff';
-    this.parentElement.parentElement.style.boxShadow = '0 0 0 2px rgba(22, 93, 255, 0.1)';
+    if (this.parentElement && this.parentElement.parentElement) {
+      this.parentElement.parentElement.style.borderColor = '#165dff';
+      this.parentElement.parentElement.style.boxShadow = '0 0 0 2px rgba(22, 93, 255, 0.1)';
+    }
   });
 
   phoneInputSignup.addEventListener('blur', function() {
-    this.parentElement.parentElement.style.borderColor = '#c5c5c5';
-    this.parentElement.parentElement.style.boxShadow = 'none';
+    if (this.parentElement && this.parentElement.parentElement) {
+      this.parentElement.parentElement.style.borderColor = '#c5c5c5';
+      this.parentElement.parentElement.style.boxShadow = 'none';
+    }
   });
-}
 
-if (clearBtnSignup) {
-  clearBtnSignup.addEventListener('click', function() {
-    phoneInputSignup.value = '';
-    AppState.phoneNumber = '';
-    clearBtnSignup.style.display = 'none';
-    updateCreateAccountButton();
-    phoneInputSignup.focus();
-  });
-}
+  if (clearBtnSignup) {
+    clearBtnSignup.addEventListener('click', function() {
+      if (phoneInputSignup) {
+        phoneInputSignup.value = '';
+        phoneInputSignup.focus();
+      }
+      AppState.phoneNumber = '';
+      if (clearBtnSignup) {
+        clearBtnSignup.style.display = 'none';
+      }
+      updateCreateAccountButton();
+    });
+  }
 
-if (agreementCheckboxSignup) {
-  agreementCheckboxSignup.addEventListener('change', function() {
-    AppState.agreementAccepted = this.checked;
-    updateCreateAccountButton();
-  });
+  if (agreementCheckboxSignup) {
+    agreementCheckboxSignup.addEventListener('change', function() {
+      AppState.agreementAccepted = this.checked;
+      updateCreateAccountButton();
+    });
+  }
+
+  if (createAccountBtn) {
+    createAccountBtn.addEventListener('click', function() {
+      const phoneDigits = AppState.phoneNumber.replace(/\s/g, '');
+      
+      if (phoneDigits.length < 11) {
+        alert('請輸入有效的手機號碼');
+        return;
+      }
+      
+      if (!AppState.agreementAccepted) {
+        alert('請先同意服務條款');
+        return;
+      }
+      
+      // Simulate API call - check if account exists
+      setTimeout(() => {
+        // Randomly show account exists modal or proceed to verification
+        if (Math.random() > 0.5) {
+          showAccountExistsModal();
+        } else {
+          showPage('verify-code');
+          updateCodePhoneNumber();
+        }
+      }, 500);
+    });
+  }
+  }
 }
 
 function updateCreateAccountButton() {
@@ -144,72 +206,74 @@ function updateCreateAccountButton() {
   }
 }
 
-if (createAccountBtn) {
-  createAccountBtn.addEventListener('click', function() {
-    const phoneDigits = AppState.phoneNumber.replace(/\s/g, '');
-    
-    if (phoneDigits.length < 11) {
-      alert('請輸入有效的手機號碼');
-      return;
-    }
-    
-    if (!AppState.agreementAccepted) {
-      alert('請先同意服務條款');
-      return;
-    }
-    
-    // Simulate API call - check if account exists
-    setTimeout(() => {
-      // Randomly show account exists modal or proceed to verification
-      if (Math.random() > 0.5) {
-        showAccountExistsModal();
-      } else {
-        showPage('verify-code');
-        updateCodePhoneNumber();
-      }
-    }, 500);
-  });
-}
-
 // Phone Input - Login
-const phoneInputLogin = document.getElementById('phoneInputLogin');
-const clearBtnLogin = document.getElementById('clearBtnLogin');
-const loginBtn = document.getElementById('loginBtn');
+// DOM elements will be accessed in DOMContentLoaded
+let phoneInputLogin, clearBtnLogin, loginBtn;
 
-if (phoneInputLogin) {
+function initPhoneInputLogin() {
+  phoneInputLogin = document.getElementById('phoneInputLogin');
+  clearBtnLogin = document.getElementById('clearBtnLogin');
+  loginBtn = document.getElementById('loginBtn');
+
+  if (phoneInputLogin) {
   phoneInputLogin.addEventListener('input', function(e) {
     const formatted = formatPhoneNumber(e.target.value);
     e.target.value = formatted;
     AppState.phoneNumber = formatted.replace(/\s/g, '');
     
-    if (formatted.trim().length > 0) {
-      clearBtnLogin.style.display = 'flex';
-    } else {
-      clearBtnLogin.style.display = 'none';
+    if (clearBtnLogin) {
+      if (formatted.trim().length > 0) {
+        clearBtnLogin.style.display = 'flex';
+      } else {
+        clearBtnLogin.style.display = 'none';
+      }
     }
     
     updateLoginButton();
   });
 
   phoneInputLogin.addEventListener('focus', function() {
-    this.parentElement.parentElement.style.borderColor = '#165dff';
-    this.parentElement.parentElement.style.boxShadow = '0 0 0 2px rgba(22, 93, 255, 0.1)';
+    if (this.parentElement && this.parentElement.parentElement) {
+      this.parentElement.parentElement.style.borderColor = '#165dff';
+      this.parentElement.parentElement.style.boxShadow = '0 0 0 2px rgba(22, 93, 255, 0.1)';
+    }
   });
 
   phoneInputLogin.addEventListener('blur', function() {
-    this.parentElement.parentElement.style.borderColor = '#c5c5c5';
-    this.parentElement.parentElement.style.boxShadow = 'none';
+    if (this.parentElement && this.parentElement.parentElement) {
+      this.parentElement.parentElement.style.borderColor = '#c5c5c5';
+      this.parentElement.parentElement.style.boxShadow = 'none';
+    }
   });
-}
 
-if (clearBtnLogin) {
-  clearBtnLogin.addEventListener('click', function() {
-    phoneInputLogin.value = '';
-    AppState.phoneNumber = '';
-    clearBtnLogin.style.display = 'none';
-    updateLoginButton();
-    phoneInputLogin.focus();
-  });
+  if (clearBtnLogin) {
+    clearBtnLogin.addEventListener('click', function() {
+      if (phoneInputLogin) {
+        phoneInputLogin.value = '';
+        phoneInputLogin.focus();
+      }
+      AppState.phoneNumber = '';
+      if (clearBtnLogin) {
+        clearBtnLogin.style.display = 'none';
+      }
+      updateLoginButton();
+    });
+  }
+
+  if (loginBtn) {
+    loginBtn.addEventListener('click', function() {
+      const phoneDigits = AppState.phoneNumber.replace(/\s/g, '');
+      
+      if (phoneDigits.length < 11) {
+        alert('請輸入有效的手機號碼');
+        return;
+      }
+      
+      showPage('verify-code');
+      updateCodePhoneNumber();
+    });
+  }
+  }
 }
 
 function updateLoginButton() {
@@ -222,40 +286,32 @@ function updateLoginButton() {
   }
 }
 
-if (loginBtn) {
-  loginBtn.addEventListener('click', function() {
-    const phoneDigits = AppState.phoneNumber.replace(/\s/g, '');
-    
-    if (phoneDigits.length < 11) {
-      alert('請輸入有效的手機號碼');
-      return;
-    }
-    
-    showPage('verify-code');
-    updateCodePhoneNumber();
-  });
-}
-
 // Country Selector
-const countrySelector = document.getElementById('countrySelector');
-const countrySelectorLogin = document.getElementById('countrySelectorLogin');
+// DOM elements will be accessed in DOMContentLoaded
+let countrySelector, countrySelectorLogin, countrySearchInput, countryList, emptyState;
 
 function openCountrySelect() {
   showPage('country-select');
 }
 
-if (countrySelector) {
-  countrySelector.addEventListener('click', openCountrySelect);
-}
+function initCountrySelector() {
+  countrySelector = document.getElementById('countrySelector');
+  countrySelectorLogin = document.getElementById('countrySelectorLogin');
 
-if (countrySelectorLogin) {
-  countrySelectorLogin.addEventListener('click', openCountrySelect);
+  if (countrySelector) {
+    countrySelector.addEventListener('click', openCountrySelect);
+  }
+
+  if (countrySelectorLogin) {
+    countrySelectorLogin.addEventListener('click', openCountrySelect);
+  }
 }
 
 // Country Selection Page
-const countrySearchInput = document.getElementById('countrySearchInput');
-const countryList = document.getElementById('countryList');
-const emptyState = document.getElementById('emptyState');
+function initCountrySelection() {
+  countrySearchInput = document.getElementById('countrySearchInput');
+  countryList = document.getElementById('countryList');
+  emptyState = document.getElementById('emptyState');
 
 const countries = [
   { name: 'China', code: '+086', flag: '🇨🇳' },
@@ -269,6 +325,8 @@ const countries = [
 ];
 
 function renderCountries(filter = '') {
+  if (!countryList || !emptyState) return;
+  
   const filtered = countries.filter(country => 
     country.name.toLowerCase().includes(filter.toLowerCase()) ||
     country.code.includes(filter)
@@ -318,30 +376,40 @@ function renderCountries(filter = '') {
   }
 }
 
-if (countrySearchInput) {
-  countrySearchInput.addEventListener('input', function(e) {
-    renderCountries(e.target.value);
-  });
-  
-  countrySearchInput.addEventListener('focus', function() {
-    this.parentElement.style.borderColor = '#165dff';
-  });
-  
-  countrySearchInput.addEventListener('blur', function() {
-    this.parentElement.style.borderColor = '#c5c5c5';
-  });
-}
+  if (countrySearchInput) {
+    countrySearchInput.addEventListener('input', function(e) {
+      renderCountries(e.target.value);
+    });
+    
+    countrySearchInput.addEventListener('focus', function() {
+      if (this.parentElement) {
+        this.parentElement.style.borderColor = '#165dff';
+      }
+    });
+    
+    countrySearchInput.addEventListener('blur', function() {
+      if (this.parentElement) {
+        this.parentElement.style.borderColor = '#c5c5c5';
+      }
+    });
+  }
 
-// Initialize country list
-if (countryList) {
-  renderCountries();
+  // Initialize country list
+  if (countryList) {
+    renderCountries();
+  }
 }
 
 // Verification Code Page
-const codeInputs = document.querySelectorAll('.code-input');
-const verifyCodeBtn = document.getElementById('verifyCodeBtn');
-const resendCodeLink = document.getElementById('resendCodeLink');
-const resendBtn = document.getElementById('resendBtn');
+// DOM elements will be accessed in DOMContentLoaded
+let codeInputs, verifyCodeBtn, resendCodeLink, resendBtn;
+
+function initVerificationCode() {
+  codeInputs = document.querySelectorAll('.code-input');
+  verifyCodeBtn = document.getElementById('verifyCodeBtn');
+  resendCodeLink = document.getElementById('resendCodeLink');
+  resendBtn = document.getElementById('resendBtn');
+}
 
 function updateCodePhoneNumber() {
   const codePhoneNumber = document.getElementById('codePhoneNumber');
@@ -350,7 +418,9 @@ function updateCodePhoneNumber() {
   }
 }
 
-if (codeInputs.length > 0) {
+function initCodeInputs() {
+  if (!codeInputs || codeInputs.length === 0) return;
+  
   codeInputs.forEach((input, index) => {
     input.addEventListener('input', function(e) {
       const value = e.target.value.replace(/\D/g, '');
@@ -378,14 +448,21 @@ if (codeInputs.length > 0) {
         }
       });
       updateVerificationCode();
-      if (codeInputs[pasted.length]) {
-        codeInputs[pasted.length].focus();
+      // Fix: Check if pasted.length is within bounds before accessing
+      const nextIndex = Math.min(pasted.length, codeInputs.length - 1);
+      if (codeInputs[nextIndex]) {
+        codeInputs[nextIndex].focus();
+      } else if (codeInputs.length > 0 && pasted.length >= codeInputs.length) {
+        // If all inputs are filled, focus on the last one
+        codeInputs[codeInputs.length - 1].focus();
       }
     });
   });
 }
 
 function updateVerificationCode() {
+  if (!codeInputs || codeInputs.length === 0) return;
+  
   AppState.verificationCode = Array.from(codeInputs).map(input => input.value).join('');
   const isValid = AppState.verificationCode.length === 6;
   
@@ -395,7 +472,9 @@ function updateVerificationCode() {
   }
 }
 
-if (verifyCodeBtn) {
+function initVerifyCodeButton() {
+  if (!verifyCodeBtn) return;
+  
   verifyCodeBtn.addEventListener('click', function() {
     if (AppState.verificationCode.length !== 6) {
       alert('請輸入完整的驗證碼');
@@ -415,120 +494,150 @@ if (verifyCodeBtn) {
       } else {
         // Error - show resend option
         alert('驗證碼錯誤，請重新輸入');
-        resendCodeLink.style.display = 'block';
+        if (resendCodeLink) {
+          resendCodeLink.style.display = 'block';
+        }
         codeInputs.forEach(input => input.value = '');
-        codeInputs[0].focus();
+        if (codeInputs[0]) {
+          codeInputs[0].focus();
+        }
         updateVerificationCode();
       }
     }, 500);
   });
 }
 
-if (resendBtn) {
+function initResendButton() {
+  if (!resendBtn) return;
+  
   resendBtn.addEventListener('click', function(e) {
     e.preventDefault();
     alert('驗證碼已重新發送');
-    resendCodeLink.style.display = 'none';
+    if (resendCodeLink) {
+      resendCodeLink.style.display = 'none';
+    }
     codeInputs.forEach(input => input.value = '');
-    codeInputs[0].focus();
+    if (codeInputs[0]) {
+      codeInputs[0].focus();
+    }
     updateVerificationCode();
   });
 }
 
 // Terms Link
-const termsLink = document.getElementById('termsLink');
-if (termsLink) {
-  termsLink.addEventListener('click', function(e) {
-    e.preventDefault();
-    showPage('terms');
-  });
+// DOM elements will be accessed in DOMContentLoaded
+let termsLink, goToHomeBtn;
+
+function initTermsLink() {
+  termsLink = document.getElementById('termsLink');
+  if (termsLink) {
+    termsLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      showPage('terms');
+    });
+  }
 }
 
 // Success Page
-const goToHomeBtn = document.getElementById('goToHomeBtn');
-if (goToHomeBtn) {
-  goToHomeBtn.addEventListener('click', function() {
-    // Reset state
-    AppState.phoneNumber = '';
-    AppState.verificationCode = '';
-    AppState.agreementAccepted = false;
-    
-    // Clear inputs
-    if (phoneInputSignup) phoneInputSignup.value = '';
-    if (phoneInputLogin) phoneInputLogin.value = '';
-    if (agreementCheckboxSignup) agreementCheckboxSignup.checked = false;
-    codeInputs.forEach(input => input.value = '');
-    
-    showPage('welcome');
-  });
+function initSuccessPage() {
+  goToHomeBtn = document.getElementById('goToHomeBtn');
+  if (goToHomeBtn) {
+    goToHomeBtn.addEventListener('click', function() {
+      // Reset state
+      AppState.phoneNumber = '';
+      AppState.verificationCode = '';
+      AppState.agreementAccepted = false;
+      
+      // Clear inputs
+      if (phoneInputSignup) phoneInputSignup.value = '';
+      if (phoneInputLogin) phoneInputLogin.value = '';
+      if (agreementCheckboxSignup) agreementCheckboxSignup.checked = false;
+      if (codeInputs && codeInputs.length > 0) {
+        codeInputs.forEach(input => input.value = '');
+      }
+      
+      showPage('welcome');
+    });
+  }
 }
 
 // Modal Functions
+// DOM elements will be accessed in DOMContentLoaded
+let closeModalBtn, loginNowBtn, maskOverlay, accountExistsModal;
+
 function showAccountExistsModal() {
-  const modal = document.getElementById('accountExistsModal');
-  const mask = document.getElementById('maskOverlay');
+  if (!accountExistsModal || !maskOverlay) return;
   
-  if (modal && mask) {
-    mask.style.display = 'block';
-    modal.style.display = 'block';
-    
-    setTimeout(() => {
-      mask.style.transition = 'opacity 0.3s ease';
-      modal.style.transition = 'opacity 0.3s ease';
-      mask.style.opacity = '1';
-      modal.style.opacity = '1';
-    }, 10);
-  }
+  maskOverlay.style.display = 'block';
+  accountExistsModal.style.display = 'block';
+  
+  setTimeout(() => {
+    maskOverlay.style.transition = 'opacity 0.3s ease';
+    accountExistsModal.style.transition = 'opacity 0.3s ease';
+    maskOverlay.style.opacity = '1';
+    accountExistsModal.style.opacity = '1';
+  }, 10);
 }
 
 function closeModal() {
-  const modal = document.getElementById('accountExistsModal');
-  const mask = document.getElementById('maskOverlay');
+  if (!accountExistsModal || !maskOverlay) return;
   
-  if (modal && mask) {
-    mask.style.transition = 'opacity 0.3s ease';
-    modal.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-    mask.style.opacity = '0';
-    modal.style.opacity = '0';
-    modal.style.transform = 'translateY(100%)';
-    
-    setTimeout(() => {
-      mask.style.display = 'none';
-      modal.style.display = 'none';
-      modal.style.transform = 'translateY(0)';
-    }, 300);
+  maskOverlay.style.transition = 'opacity 0.3s ease';
+  accountExistsModal.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+  maskOverlay.style.opacity = '0';
+  accountExistsModal.style.opacity = '0';
+  accountExistsModal.style.transform = 'translateY(100%)';
+  
+  setTimeout(() => {
+    maskOverlay.style.display = 'none';
+    accountExistsModal.style.display = 'none';
+    accountExistsModal.style.transform = 'translateY(0)';
+  }, 300);
+}
+
+function initModal() {
+  closeModalBtn = document.getElementById('closeModalBtn');
+  loginNowBtn = document.getElementById('loginNowBtn');
+  maskOverlay = document.getElementById('maskOverlay');
+  accountExistsModal = document.getElementById('accountExistsModal');
+
+  if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', closeModal);
   }
-}
 
-const closeModalBtn = document.getElementById('closeModalBtn');
-const loginNowBtn = document.getElementById('loginNowBtn');
-const maskOverlay = document.getElementById('maskOverlay');
+  if (loginNowBtn) {
+    loginNowBtn.addEventListener('click', function() {
+      closeModal();
+      AppState.isSignup = false;
+      showPage('phone-login');
+      if (phoneInputLogin) {
+        phoneInputLogin.value = AppState.phoneNumber;
+      }
+    });
+  }
 
-if (closeModalBtn) {
-  closeModalBtn.addEventListener('click', closeModal);
-}
-
-if (loginNowBtn) {
-  loginNowBtn.addEventListener('click', function() {
-    closeModal();
-    AppState.isSignup = false;
-    showPage('phone-login');
-    if (phoneInputLogin) {
-      phoneInputLogin.value = AppState.phoneNumber;
-    }
-  });
-}
-
-if (maskOverlay) {
-  maskOverlay.addEventListener('click', closeModal);
+  if (maskOverlay) {
+    maskOverlay.addEventListener('click', closeModal);
+  }
 }
 
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
   console.log('App initialized');
   
-  // Initialize welcome page
+  // Initialize all components
   initWelcomePage();
+  initPhoneInputSignup();
+  initPhoneInputLogin();
+  initCountrySelector();
+  initCountrySelection();
+  initVerificationCode();
+  initCodeInputs();
+  initVerifyCodeButton();
+  initResendButton();
+  initTermsLink();
+  initSuccessPage();
+  initModal();
   
   showPage('welcome');
   updateCreateAccountButton();
