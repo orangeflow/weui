@@ -45,40 +45,6 @@
       font-weight: 400;
     }
 
-    .header-nav {
-      position: absolute;
-      top: 0;
-      right: 0;
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .header-nav-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 16px;
-      background: #07C160;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      font-size: 14px;
-      font-weight: 500;
-      transition: all 0.2s;
-      box-shadow: 0 2px 4px rgba(7, 193, 96, 0.2);
-    }
-
-    .header-nav-link:hover {
-      background: #06AD56;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 8px rgba(7, 193, 96, 0.3);
-    }
-
-    .header-nav-link:active {
-      transform: translateY(0);
-    }
-
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -174,20 +140,6 @@
 <body>
   <div class="container">
     <div class="header">
-      <div class="header-nav">
-        <a href="colorToken.html" class="header-nav-link">
-          <span>🎨</span>
-          <span>色彩体系</span>
-        </a>
-        <a href="designTokenTable.html" class="header-nav-link">
-          <span>📊</span>
-          <span>Token 表</span>
-        </a>
-        <a href="typographyTokenTable.html" class="header-nav-link">
-          <span>📝</span>
-          <span>文字样式</span>
-        </a>
-      </div>
       <h1>WeUI 设计体系文档</h1>
       <p>基于微信设计规范的完整设计体系 Token 文档</p>
     </div>
