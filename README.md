@@ -5,7 +5,7 @@
 ## 项目结构
 
 ### 📚 weui-docs/
-WeUI 设计体系文档和工具
+MimicUI 设计体系文档和工具
 - 色彩体系 Token 表（colorToken.html）
 - 设计 Token 表（designTokenTable.html）
 - 文字样式 Token 表（typographyTokenTable.html）
@@ -43,12 +43,12 @@ Next.js 支付应用
 ### 📖 docs/
 项目文档
 - 各种 README 和指南文档
-- WeUI 学习资料
+- MimicUI 学习资料
 - 实施指南
 
 ## 快速开始
 
-### WeUI 文档
+### MimicUI 文档
 ```bash
 cd weui-docs
 # 打开 index.html 查看文档入口

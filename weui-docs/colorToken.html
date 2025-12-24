@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WeUI 色彩体系 - Color Tokens</title>
+  <title>MimicUI 色彩体系 - Color Tokens</title>
   <style>
     * {
       margin: 0;
@@ -802,8 +802,8 @@
 <body>
   <div class="container">
     <div class="header">
-      <h1>WeUI 色彩体系</h1>
-      <p>白天模式与暗黑模式色彩对比 | <a href="https://weui-multi-platform.pages.woa.com/guide/" target="_blank" style="color: #07C160; text-decoration: underline;">参考官方文档</a></p>
+      <h1>MimicUI 色彩体系</h1>
+      <p>白天模式与暗黑模式色彩对比</p>
     </div>
 
     <!-- 页面导航 -->
@@ -2259,19 +2259,6 @@
       <div class="color-mapping-table">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 16px;">
           <h2 style="margin: 0; color: #1a1a1a; font-size: 24px;">颜色到组件映射表</h2>
-          <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-            <div style="display: flex; gap: 12px;">
-              <button class="mapping-filter-btn active" onclick="filterMappingTable('all')" data-filter="all">全部</button>
-              <button class="mapping-filter-btn" onclick="filterMappingTable('light')" data-filter="light">白天模式</button>
-              <button class="mapping-filter-btn" onclick="filterMappingTable('dark')" data-filter="dark">暗黑模式</button>
-            </div>
-            <div style="display: flex; align-items: center; gap: 8px; padding-left: 16px; border-left: 1px solid #e5e5e5;">
-              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px; color: #666;">
-                <input type="checkbox" id="groupByColorFamily" onchange="toggleColorFamilyGrouping()" style="width: 18px; height: 18px; cursor: pointer;">
-                <span>按色系分组</span>
-              </label>
-            </div>
-          </div>
         </div>
         <table id="colorMappingTable">
           <thead>
@@ -2305,7 +2292,7 @@
     </div>
 
     <div class="footer">
-      <p>WeUI 色彩体系 | 基于微信设计规范 | <a href="https://weui-multi-platform.pages.woa.com/guide/" target="_blank" style="color: #07C160; text-decoration: underline;">参考官方文档</a></p>
+      <p>MimicUI 色彩体系 | 基于微信设计规范</p>
     </div>
   </div>
 
@@ -2531,10 +2518,12 @@
         document.getElementById('comparisonTab').classList.add('active');
         // 如果按色系排列已启用，重新应用排序
         setTimeout(() => {
-          if (colorFamilyGroupingComponentsEnabled) {
+          const checkbox = document.getElementById('groupByColorFamilyComponents');
+          if (checkbox && checkbox.checked) {
+            colorFamilyGroupingComponentsEnabled = true;
             toggleColorFamilyGroupingComponents();
           }
-        }, 100);
+        }, 200);
       } else if (tab === 'components') {
         document.getElementById('componentsTab').classList.add('active');
         // 如果按色系排列已启用，重新应用排序
@@ -2547,7 +2536,16 @@
         document.getElementById('colorsTab').classList.add('active');
         generateColorMappingTable();
         // 延迟添加 token 标注，确保表格已生成
-        setTimeout(() => addTokenLabels(), 100);
+        setTimeout(() => {
+          addTokenLabels();
+          // 如果按色系排列已启用，应用排序
+          const checkbox = document.getElementById('groupByColorFamilyComponents');
+          if (checkbox && checkbox.checked) {
+            colorFamilyGroupingEnabled = true;
+            colorFamilyGroupingComponentsEnabled = true;
+            sortMappingTable('similarity', 'asc');
+          }
+        }, 200);
       }
     }
 
@@ -2649,12 +2647,7 @@
         }
       });
       
-      // 应用当前的筛选状态
-      if (currentMappingFilter !== 'all') {
-        filterMappingTable(currentMappingFilter);
-      }
-      
-      // 应用当前的排序状态
+      // 应用当前的排序状态（筛选由 showTheme 函数处理）
       if (currentSortType && currentSortOrder) {
         sortMappingTable(currentSortType, currentSortOrder);
       }
@@ -3079,14 +3072,43 @@
     // 切换色系分组
     function toggleColorFamilyGrouping() {
       const checkbox = document.getElementById('groupByColorFamily');
+      if (!checkbox) {
+        console.warn('groupByColorFamily checkbox not found');
+        return;
+      }
+      
+      // 确保在"按颜色查看"标签页中
+      const colorsTab = document.getElementById('colorsTab');
+      if (!colorsTab || !colorsTab.classList.contains('active')) {
+        // 如果不在"按颜色查看"标签页，不执行排序
+        return;
+      }
+      
       colorFamilyGroupingEnabled = checkbox.checked;
       
       // 如果启用色系分组，自动应用相近色排序
       if (colorFamilyGroupingEnabled) {
-        sortMappingTable('similarity', 'asc');
+        // 使用 setTimeout 确保表格已完全渲染
+        setTimeout(() => {
+          const tbody = document.getElementById('colorMappingBody');
+          if (tbody && tbody.querySelectorAll('tr').length > 0) {
+            sortMappingTable('similarity', 'asc');
+          } else {
+            console.warn('Table not ready, retrying...');
+            setTimeout(() => sortMappingTable('similarity', 'asc'), 100);
+          }
+        }, 100);
       } else {
         // 如果禁用，恢复按颜色值排序
-        sortMappingTable('value', 'asc');
+        setTimeout(() => {
+          const tbody = document.getElementById('colorMappingBody');
+          if (tbody && tbody.querySelectorAll('tr').length > 0) {
+            sortMappingTable('value', 'asc');
+          } else {
+            console.warn('Table not ready, retrying...');
+            setTimeout(() => sortMappingTable('value', 'asc'), 100);
+          }
+        }, 100);
       }
     }
 
@@ -3101,7 +3123,17 @@
       });
       
       const tbody = document.getElementById('colorMappingBody');
+      if (!tbody) {
+        console.warn('colorMappingBody tbody not found');
+        return;
+      }
+      
       const rows = Array.from(tbody.querySelectorAll('tr:not(.hidden)'));
+      
+      if (rows.length === 0) {
+        console.warn('No rows found in colorMappingBody');
+        return;
+      }
       
       if (sortType === 'value') {
         // 按颜色值排序
@@ -3148,6 +3180,9 @@
         rows.sort((a, b) => {
           const colorA = a.getAttribute('data-color-value');
           const colorB = b.getAttribute('data-color-value');
+          
+          if (!colorA || !colorB) return 0;
+          
           const rgbA = colorToRgb(colorA);
           const rgbB = colorToRgb(colorB);
           const hsvA = rgbToHsv(rgbA.r, rgbA.g, rgbA.b);
@@ -3163,8 +3198,20 @@
             if (orderA !== orderB) {
               return orderA - orderB;
             }
+            
+            // 同色系内按明度由浅到深排序（V值从大到小）
+            if (Math.abs(hsvA.v - hsvB.v) > 0.01) {
+              return hsvB.v - hsvA.v; // 降序：浅色在前
+            }
+            // 明度相近时，按色相排序
+            if (Math.abs(hsvA.h - hsvB.h) > 1) {
+              return hsvA.h - hsvB.h;
+            }
+            // 色相也相近时，按饱和度排序
+            return hsvB.s - hsvA.s; // 饱和度从高到低
           }
           
+          // 未启用色系分组，按HSV排序
           // 先按色相排序
           if (hsvA.h !== hsvB.h) {
             return order === 'asc' ? hsvA.h - hsvB.h : hsvB.h - hsvA.h;
@@ -3179,18 +3226,74 @@
       }
       
       // 重新插入排序后的行
-      rows.forEach(row => tbody.appendChild(row));
+      // 先移除所有行（避免重复）
+      rows.forEach(row => {
+        if (row.parentNode === tbody) {
+          tbody.removeChild(row);
+        }
+      });
+      
+      // 然后按新顺序添加
+      rows.forEach(row => {
+        tbody.appendChild(row);
+      });
     }
 
     // 按色系排列组件内的颜色项
     function toggleColorFamilyGroupingComponents() {
       const checkbox = document.getElementById('groupByColorFamilyComponents');
-      if (!checkbox) return;
+      if (!checkbox) {
+        console.warn('groupByColorFamilyComponents checkbox not found');
+        return;
+      }
       
       colorFamilyGroupingComponentsEnabled = checkbox.checked;
       
+      // 检查当前在哪个标签页
+      const componentsTab = document.getElementById('componentsTab');
+      const comparisonTab = document.getElementById('comparisonTab');
+      const colorsTab = document.getElementById('colorsTab');
+      const isComponentsActive = componentsTab && componentsTab.classList.contains('active');
+      const isComparisonActive = comparisonTab && comparisonTab.classList.contains('active');
+      const isColorsActive = colorsTab && colorsTab.classList.contains('active');
+      
+      // 如果在"按颜色查看"标签页，使用 toggleColorFamilyGrouping 的功能
+      if (isColorsActive) {
+        colorFamilyGroupingEnabled = checkbox.checked;
+        if (colorFamilyGroupingEnabled) {
+          setTimeout(() => {
+            const tbody = document.getElementById('colorMappingBody');
+            if (tbody && tbody.querySelectorAll('tr').length > 0) {
+              sortMappingTable('similarity', 'asc');
+            } else {
+              setTimeout(() => sortMappingTable('similarity', 'asc'), 100);
+            }
+          }, 100);
+        } else {
+          setTimeout(() => {
+            const tbody = document.getElementById('colorMappingBody');
+            if (tbody && tbody.querySelectorAll('tr').length > 0) {
+              sortMappingTable('value', 'asc');
+            } else {
+              setTimeout(() => sortMappingTable('value', 'asc'), 100);
+            }
+          }, 100);
+        }
+        return;
+      }
+      
+      if (!isComponentsActive && !isComparisonActive) {
+        // 如果不在"按组件查看"或"色彩对比"标签页，不执行排序
+        return;
+      }
+      
       // 处理组件卡片内的颜色项
       const colorCards = document.querySelectorAll('.color-card');
+      
+      if (colorCards.length === 0) {
+        console.warn('No color-card elements found');
+        return;
+      }
       
       colorCards.forEach(card => {
         const colorItems = Array.from(card.querySelectorAll('.color-item'));
@@ -3254,20 +3357,32 @@
           });
         }
         
-        // 安全地重新组织元素：先保存所有非 color-item 的子元素（克隆它们以避免 innerHTML 的影响）
-        const otherChildren = Array.from(card.children)
+        // 使用更可靠的方法：保存所有子元素的顺序，然后重新组织
+        // 先保存所有非 color-item 的子元素（在移除前保存它们的 HTML）
+        const otherChildrenHTML = Array.from(card.children)
           .filter(child => !child.classList.contains('color-item'))
-          .map(child => child.cloneNode(true));
+          .map(child => child.outerHTML);
         
-        // 清空 card
-        card.innerHTML = '';
-        
-        // 重新添加：先添加非 color-item 的子元素（使用克隆的版本）
-        otherChildren.forEach(child => {
-          card.appendChild(child);
+        // 从 DOM 中移除所有 color-item（它们已经在 colorItems 数组中了）
+        colorItems.forEach(item => {
+          if (item.parentNode === card) {
+            card.removeChild(item);
+          }
         });
         
-        // 然后添加排序后的 color-item
+        // 清空 card 并重新构建
+        card.innerHTML = '';
+        
+        // 重新添加非 color-item 的子元素
+        otherChildrenHTML.forEach(html => {
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = html;
+          while (tempDiv.firstChild) {
+            card.appendChild(tempDiv.firstChild);
+          }
+        });
+        
+        // 添加排序后的 color-item
         colorItems.forEach(item => {
           card.appendChild(item);
         });
@@ -3275,7 +3390,7 @@
       
       // 处理色彩对比部分的颜色项
       const comparisonSection = document.getElementById('comparisonSection');
-      if (comparisonSection) {
+      if (comparisonSection && isComparisonActive) {
         const lightColumn = comparisonSection.querySelector('.theme-column.light');
         const darkColumn = comparisonSection.querySelector('.theme-column.dark');
         
@@ -3584,7 +3699,7 @@
       }
     }
 
-    // 为所有颜色值添加点击事件
+      // 为所有颜色值添加点击事件
     document.addEventListener('DOMContentLoaded', function() {
       // 生成完整的色彩对比
       generateFullColorComparison();
@@ -3594,6 +3709,26 @@
       
       // 为所有已存在的TOKEN标签添加点击事件
       attachTokenClickEvents();
+      
+      // 如果按色系排列 checkbox 默认是 checked 的，应用排序
+      setTimeout(() => {
+        // 检查"按组件查看"的 checkbox
+        const checkboxComponents = document.getElementById('groupByColorFamilyComponents');
+        if (checkboxComponents && checkboxComponents.checked) {
+          toggleColorFamilyGroupingComponents();
+        }
+        
+        // 检查"按颜色查看"的 checkbox
+        const checkboxColors = document.getElementById('groupByColorFamily');
+        if (checkboxColors && checkboxColors.checked) {
+          // 如果当前在"按颜色查看"标签页，应用排序
+          const colorsTab = document.getElementById('colorsTab');
+          if (colorsTab && colorsTab.classList.contains('active')) {
+            colorFamilyGroupingEnabled = true;
+            sortMappingTable('similarity', 'asc');
+          }
+        }
+      }, 200);
 
       // 使用事件委托处理颜色值点击
       document.addEventListener('click', function(e) {

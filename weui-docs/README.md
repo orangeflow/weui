@@ -1,6 +1,6 @@
-# WeUI 设计体系文档
+# MimicUI 设计体系文档
 
-WeUI 设计体系的完整文档和工具集合。
+MimicUI 设计体系的完整文档和工具集合。
 
 ## 文件说明
 
@@ -17,11 +17,11 @@ WeUI 设计体系的完整文档和工具集合。
 ### 工具脚本
 - **check_missing_tokens.js** - 检查缺失的 Token
 - **check_overlay_colors.js** - 检查遮罩颜色
-- **verify_weui_compliance.js** - 验证 WeUI 合规性
+- **verify_weui_compliance.js** - 验证 MimicUI 合规性
 
 ### 文档
 - **README.md** - 本目录说明
-- **WEUI_OFFICIAL_REFERENCE.md** - WeUI 官方参考文档
+- **WEUI_OFFICIAL_REFERENCE.md** - MimicUI 官方参考文档
 - **DEPLOY_GUIDE.md** - 部署指南
 - **CHECK_TOKENS_README.md** - Token 检查说明
 

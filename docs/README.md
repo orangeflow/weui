@@ -10,9 +10,9 @@
 - **README-FLOW.md** - 项目流程说明
 - **README-IMPLEMENTATION.md** - 实施指南
 
-### WeUI 相关
-- **WEUI_APPLY_GUIDE.md** - WeUI 应用指南
-- **WEUI_LEARNING.md** - WeUI 学习资料
+### MimicUI 相关
+- **WEUI_APPLY_GUIDE.md** - MimicUI 应用指南
+- **WEUI_LEARNING.md** - MimicUI 学习资料
 - **DARK_MODE_COLOR_MAPPING.md** - 暗黑模式颜色映射
 
 ### HTML 版本

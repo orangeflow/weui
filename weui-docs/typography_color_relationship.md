@@ -32,37 +32,37 @@
    - FONT-SIZE-05 (小正文) - usage: "辅助说明、次要内容" → TXT-02 usage: "描述文字"
    - FONT-SIZE-06 (辅助文字) - usage: "提示文字、标签、时间" → TXT-03 usage: "提示文字、占位符"
 
-## 从 WeUI 文档分析（WEUI_APPLY_GUIDE.md）
+## 从 MimicUI 文档分析（WEUI_APPLY_GUIDE.md）
 
-根据 WeUI 文档中的示例：
+根据 MimicUI 文档中的示例：
 
 ```css
-.weui-text-title {
+.mimicui-text-title {
   font-size: 18px;
   font-weight: 600;
   line-height: 1.4;
-  color: var(--weui-text-color-primary);  /* TXT-01 */
+  color: var(--mimicui-text-color-primary);  /* TXT-01 */
 }
 
-.weui-text-body {
+.mimicui-text-body {
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
-  color: var(--weui-text-color-primary);  /* TXT-01 */
+  color: var(--mimicui-text-color-primary);  /* TXT-01 */
 }
 
-.weui-text-caption {
+.mimicui-text-caption {
   font-size: 14px;
   font-weight: 400;
   line-height: 1.4;
-  color: var(--weui-text-color-secondary);  /* TXT-02 */
+  color: var(--mimicui-text-color-secondary);  /* TXT-02 */
 }
 
-.weui-text-helper {
+.mimicui-text-helper {
   font-size: 12px;
   font-weight: 400;
   line-height: 1.4;
-  color: var(--weui-text-color-tertiary);  /* TXT-03 */
+  color: var(--mimicui-text-color-tertiary);  /* TXT-03 */
 }
 ```
 

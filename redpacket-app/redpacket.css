@@ -1,68 +1,68 @@
-/* CSS Variables - WeUI Theme System */
+/* CSS Variables - MimicUI Theme System */
 :root {
-  /* Light Mode (Default) - WeUI Colors */
-  --weui-bg-color-primary: #FFFFFF;
-  --weui-bg-color-secondary: #F7F7F7;
-  --weui-bg-color-tertiary: #EDEDED;
-  --weui-text-color-primary: #000000;
-  --weui-text-color-secondary: #888888;
-  --weui-text-color-tertiary: #BBBBBB;
-  --weui-border-color-base: #E5E5E5;
-  --weui-border-color-light: #F0F0F0;
-  --weui-color-primary: #07C160;
-  --weui-color-primary-hover: #06AD56;
-  --weui-color-primary-active: #059648;
+  /* Light Mode (Default) - MimicUI Colors */
+  --mimicui-bg-color-primary: #FFFFFF;
+  --mimicui-bg-color-secondary: #F7F7F7;
+  --mimicui-bg-color-tertiary: #EDEDED;
+  --mimicui-text-color-primary: #000000;
+  --mimicui-text-color-secondary: #888888;
+  --mimicui-text-color-tertiary: #BBBBBB;
+  --mimicui-border-color-base: #E5E5E5;
+  --mimicui-border-color-light: #F0F0F0;
+  --mimicui-color-primary: #07C160;
+  --mimicui-color-primary-hover: #06AD56;
+  --mimicui-color-primary-active: #059648;
   
   /* Component Colors */
-  --bg-primary: var(--weui-bg-color-primary);
-  --bg-secondary: var(--weui-bg-color-secondary);
-  --text-primary: var(--weui-text-color-primary);
-  --text-secondary: var(--weui-text-color-secondary);
-  --text-tertiary: var(--weui-text-color-tertiary);
-  --border-color: var(--weui-border-color-base);
-  --success-color: var(--weui-color-primary);
-  --button-bg: var(--weui-bg-color-secondary);
-  --button-text: var(--weui-color-primary);
-  --icon-color: var(--weui-text-color-primary);
-  --status-bar-text: var(--weui-text-color-primary);
-  --close-button-color: var(--weui-text-color-primary);
+  --bg-primary: var(--mimicui-bg-color-primary);
+  --bg-secondary: var(--mimicui-bg-color-secondary);
+  --text-primary: var(--mimicui-text-color-primary);
+  --text-secondary: var(--mimicui-text-color-secondary);
+  --text-tertiary: var(--mimicui-text-color-tertiary);
+  --border-color: var(--mimicui-border-color-base);
+  --success-color: var(--mimicui-color-primary);
+  --button-bg: var(--mimicui-bg-color-secondary);
+  --button-text: var(--mimicui-color-primary);
+  --icon-color: var(--mimicui-text-color-primary);
+  --status-bar-text: var(--mimicui-text-color-primary);
+  --close-button-color: var(--mimicui-text-color-primary);
   --tab-active-color: #F45D4C; /* Design specific red */
-  --card-bg: var(--weui-bg-color-primary);
-  --card-border: var(--weui-border-color-base);
-  --card-hover: var(--weui-bg-color-secondary);
+  --card-bg: var(--mimicui-bg-color-primary);
+  --card-border: var(--mimicui-border-color-base);
+  --card-hover: var(--mimicui-bg-color-secondary);
 }
 
 [data-theme="dark"] {
-  /* Dark Mode - WeUI Colors */
-  --weui-bg-color-primary: #000000;
-  --weui-bg-color-secondary: #1C1C1E;
-  --weui-bg-color-tertiary: #2C2C2E;
-  --weui-text-color-primary: #FFFFFF;
-  --weui-text-color-secondary: #AEAEB2;
-  --weui-text-color-tertiary: #8E8E93;
-  --weui-border-color-base: #38383A;
-  --weui-border-color-light: #48484A;
-  --weui-color-primary: #1AAD19;
-  --weui-color-primary-hover: #179B16;
-  --weui-color-primary-active: #158A14;
+  /* Dark Mode - MimicUI Colors */
+  --mimicui-bg-color-primary: #000000;
+  --mimicui-bg-color-secondary: #1C1C1E;
+  --mimicui-bg-color-tertiary: #2C2C2E;
+  --mimicui-text-color-primary: #FFFFFF;
+  --mimicui-text-color-secondary: #AEAEB2;
+  --mimicui-text-color-tertiary: #8E8E93;
+  --mimicui-border-color-base: #38383A;
+  --mimicui-border-color-light: #48484A;
+  --mimicui-color-primary: #1AAD19;
+  --mimicui-color-primary-hover: #179B16;
+  --mimicui-color-primary-active: #158A14;
   
   /* Component Colors */
-  --bg-primary: var(--weui-bg-color-primary);
-  --bg-secondary: var(--weui-bg-color-secondary);
-  --text-primary: var(--weui-text-color-primary);
-  --text-secondary: var(--weui-text-color-secondary);
-  --text-tertiary: var(--weui-text-color-tertiary);
-  --border-color: var(--weui-border-color-base);
-  --success-color: var(--weui-color-primary);
-  --button-bg: var(--weui-bg-color-secondary);
-  --button-text: var(--weui-color-primary);
-  --icon-color: var(--weui-text-color-primary);
-  --status-bar-text: var(--weui-text-color-primary);
-  --close-button-color: var(--weui-text-color-primary);
+  --bg-primary: var(--mimicui-bg-color-primary);
+  --bg-secondary: var(--mimicui-bg-color-secondary);
+  --text-primary: var(--mimicui-text-color-primary);
+  --text-secondary: var(--mimicui-text-color-secondary);
+  --text-tertiary: var(--mimicui-text-color-tertiary);
+  --border-color: var(--mimicui-border-color-base);
+  --success-color: var(--mimicui-color-primary);
+  --button-bg: var(--mimicui-bg-color-secondary);
+  --button-text: var(--mimicui-color-primary);
+  --icon-color: var(--mimicui-text-color-primary);
+  --status-bar-text: var(--mimicui-text-color-primary);
+  --close-button-color: var(--mimicui-text-color-primary);
   --tab-active-color: #FF5A4D; /* Dark mode adjusted red */
-  --card-bg: var(--weui-bg-color-secondary);
-  --card-border: var(--weui-border-color-base);
-  --card-hover: var(--weui-bg-color-tertiary);
+  --card-bg: var(--mimicui-bg-color-secondary);
+  --card-border: var(--mimicui-border-color-base);
+  --card-hover: var(--mimicui-bg-color-tertiary);
 }
 
 /* Reset and Base Styles */

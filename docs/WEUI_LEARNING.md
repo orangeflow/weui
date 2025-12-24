@@ -1,8 +1,8 @@
-# WeUI 设计与前端规则学习指南
+# MimicUI 设计与前端规则学习指南
 
-## 什么是 WeUI？
+## 什么是 MimicUI？
 
-WeUI 是由微信官方设计团队为微信 Web 开发量身打造的基础样式库，旨在提供与微信原生视觉体验一致的界面组件。
+MimicUI 是由微信官方设计团队为微信 Web 开发量身打造的基础样式库，旨在提供与微信原生视觉体验一致的界面组件。
 
 ## 核心设计原则
 
@@ -60,15 +60,15 @@ WeUI 是由微信官方设计团队为微信 Web 开发量身打造的基础样�
 ### 1. 组件化开发
 ```html
 <!-- 按钮组件示例 -->
-<button class="weui-btn weui-btn_primary">主要按钮</button>
-<button class="weui-btn weui-btn_default">次要按钮</button>
+<button class="mimicui-btn mimicui-btn_primary">主要按钮</button>
+<button class="mimicui-btn mimicui-btn_default">次要按钮</button>
 ```
 
 ### 2. BEM 命名规范
-WeUI 使用 BEM（Block Element Modifier）命名规范：
-- **Block（块）**：`.weui-btn`
-- **Element（元素）**：`.weui-btn__icon`
-- **Modifier（修饰符）**：`.weui-btn_primary`
+MimicUI 使用 BEM（Block Element Modifier）命名规范：
+- **Block（块）**：`.mimicui-btn`
+- **Element（元素）**：`.mimicui-btn__icon`
+- **Modifier（修饰符）**：`.mimicui-btn_primary`
 
 ### 3. 响应式设计
 - **移动优先**：优先考虑移动端体验
@@ -110,19 +110,19 @@ WeUI 使用 BEM（Block Element Modifier）命名规范：
 ## 学习资源
 
 ### 官方资源
-1. **WeUI GitHub**：https://github.com/Tencent/weui
-2. **WeUI 官方文档**：https://weui.io/
-3. **WeUI Multi-Platform Guide**：https://weui-multi-platform.pages.woa.com/guide/
+1. **MimicUI GitHub**：https://github.com/Tencent/mimicui
+2. **MimicUI 官方文档**：https://mimicui.io/
+3. **MimicUI Multi-Platform Guide**：https://mimicui-multi-platform.pages.woa.com/guide/
 
 ### 实践建议
-1. **阅读源码**：查看 WeUI 的 CSS 和 HTML 结构
-2. **使用开发者工具**：在浏览器中查看 WeUI 组件的实现细节
+1. **阅读源码**：查看 MimicUI 的 CSS 和 HTML 结构
+2. **使用开发者工具**：在浏览器中查看 MimicUI 组件的实现细节
 3. **模仿练习**：尝试自己实现类似的组件
 4. **对比分析**：对比不同 UI 框架的设计差异
 
 ## 应用到当前项目
 
-基于 WeUI 的设计原则，可以优化当前项目的：
+基于 MimicUI 的设计原则，可以优化当前项目的：
 
 1. **按钮设计**
    - 统一按钮样式和尺寸

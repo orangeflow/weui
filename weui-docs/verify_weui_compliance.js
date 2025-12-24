@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 
 /**
- * WeUI 官方规范验证脚本
+ * MimicUI 官方规范验证脚本
  * 
  * 功能：
- * 1. 检查当前实现是否符合 WeUI 官方文档规范
+ * 1. 检查当前实现是否符合 MimicUI 官方文档规范
  * 2. 对比颜色值是否与官方文档一致
  * 3. 生成验证报告
  * 
- * 注意：此脚本需要手动访问 WeUI 官方文档进行对比验证
- * 官方文档：https://weui-multi-platform.pages.woa.com/guide/
+ * 注意：此脚本需要手动访问 MimicUI 官方文档进行对比验证
+ * 官方文档：https://mimicui-multi-platform.pages.woa.com/guide/
  */
 
 const fs = require('fs');
@@ -19,12 +19,12 @@ const COLOR_TOKEN_HTML = path.join(__dirname, 'colorToken.html');
 const DESIGN_TOKEN_HTML = path.join(__dirname, 'designTokenTable.html');
 const WEUI_OFFICIAL_REFERENCE = path.join(__dirname, 'WEUI_OFFICIAL_REFERENCE.md');
 
-console.log('📋 WeUI 官方规范验证检查清单\n');
+console.log('📋 MimicUI 官方规范验证检查清单\n');
 console.log('='.repeat(60));
 console.log('⚠️  重要提示：');
 console.log('='.repeat(60));
 console.log('此脚本提供检查清单，但实际验证需要：');
-console.log('1. 访问 WeUI 官方文档：https://weui-multi-platform.pages.woa.com/guide/');
+console.log('1. 访问 MimicUI 官方文档：https://mimicui-multi-platform.pages.woa.com/guide/');
 console.log('2. 手动对比颜色值和规范');
 console.log('3. 确保所有实现符合官方标准\n');
 
@@ -97,13 +97,13 @@ function generateVerificationReport() {
   });
   
   console.log('\n⚠️  请访问官方文档验证这些颜色值是否正确：');
-  console.log('   https://weui-multi-platform.pages.woa.com/guide/componentsAll/button\n');
+  console.log('   https://mimicui-multi-platform.pages.woa.com/guide/componentsAll/button\n');
   
   // 检查清单
   console.log('='.repeat(60));
   console.log('✅ 验证检查清单');
   console.log('='.repeat(60));
-  console.log('\n请在 WeUI 官方文档中验证以下内容：\n');
+  console.log('\n请在 MimicUI 官方文档中验证以下内容：\n');
   
   console.log('1. 颜色值验证');
   console.log('   □ 所有颜色值是否与官方文档一致');
@@ -145,28 +145,28 @@ function generateVerificationReport() {
   console.log('='.repeat(60));
   console.log('🔗 相关链接');
   console.log('='.repeat(60));
-  console.log('\n- WeUI Multi-Platform Guide:');
-  console.log('  https://weui-multi-platform.pages.woa.com/guide/');
-  console.log('\n- WeUI 官方文档:');
-  console.log('  https://weui.io/');
-  console.log('\n- WeUI GitHub:');
-  console.log('  https://github.com/Tencent/weui');
+  console.log('\n- MimicUI Multi-Platform Guide:');
+  console.log('  https://mimicui-multi-platform.pages.woa.com/guide/');
+  console.log('\n- MimicUI 官方文档:');
+  console.log('  https://mimicui.io/');
+  console.log('\n- MimicUI GitHub:');
+  console.log('  https://github.com/Tencent/mimicui');
   console.log('\n- 按钮组件文档:');
-  console.log('  https://weui-multi-platform.pages.woa.com/guide/componentsAll/button\n');
+  console.log('  https://mimicui-multi-platform.pages.woa.com/guide/componentsAll/button\n');
   
   console.log('='.repeat(60));
   console.log('📄 参考文档');
   console.log('='.repeat(60));
   console.log('\n项目中的参考文档：');
-  console.log('- WEUI_OFFICIAL_REFERENCE.md - WeUI 官方文档参考');
-  console.log('- WEUI_LEARNING.md - WeUI 学习指南');
-  console.log('- WEUI_APPLY_GUIDE.md - WeUI 应用指南');
+  console.log('- WEUI_OFFICIAL_REFERENCE.md - MimicUI 官方文档参考');
+  console.log('- WEUI_LEARNING.md - MimicUI 学习指南');
+  console.log('- WEUI_APPLY_GUIDE.md - MimicUI 应用指南');
   console.log('- DARK_MODE_COLOR_MAPPING.md - 暗黑模式颜色映射\n');
   
   console.log('='.repeat(60));
   console.log('✅ 验证完成');
   console.log('='.repeat(60));
-  console.log('\n请根据 WeUI 官方文档验证上述内容，确保所有实现符合官方规范。\n');
+  console.log('\n请根据 MimicUI 官方文档验证上述内容，确保所有实现符合官方规范。\n');
 }
 
 // 运行验证

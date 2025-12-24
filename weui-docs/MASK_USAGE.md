@@ -2,7 +2,7 @@
 
 ## 概述
 
-遮罩和覆盖层（Mask & Overlay）是 WeUI 设计中用于创建视觉层次和交互反馈的重要元素。它们通过半透明的颜色层来实现不同的视觉效果。
+遮罩和覆盖层（Mask & Overlay）是 MimicUI 设计中用于创建视觉层次和交互反馈的重要元素。它们通过半透明的颜色层来实现不同的视觉效果。
 
 ## 主要使用场景
 
@@ -120,7 +120,7 @@
 
 **实现示例**：
 ```css
-.weui-btn::before {
+.mimicui-btn::before {
   content: '';
   position: absolute;
   top: 0;
@@ -132,11 +132,11 @@
   transition: opacity 0.2s;
 }
 
-.weui-btn:active::before {
+.mimicui-btn:active::before {
   opacity: 1;
 }
 
-[data-theme="dark"] .weui-btn::before {
+[data-theme="dark"] .mimicui-btn::before {
   background-color: rgba(255, 255, 255, 0.05);
 }
 ```
@@ -156,7 +156,7 @@
 
 **实现示例**：
 ```css
-.weui-cell::before {
+.mimicui-cell::before {
   content: '';
   position: absolute;
   top: 0;
@@ -168,11 +168,11 @@
   transition: opacity 0.2s;
 }
 
-.weui-cell:active::before {
+.mimicui-cell:active::before {
   opacity: 1;
 }
 
-[data-theme="dark"] .weui-cell::before {
+[data-theme="dark"] .mimicui-cell::before {
   background-color: rgba(255, 255, 255, 0.05);
 }
 ```
@@ -192,11 +192,11 @@
 
 **实现示例**：
 ```css
-.weui-btn_disabled {
+.mimicui-btn_disabled {
   opacity: 0.5;
 }
 
-.weui-btn_disabled::before {
+.mimicui-btn_disabled::before {
   background-color: rgba(0, 0, 0, 0.05);
   opacity: 1;
 }
@@ -284,7 +284,7 @@ maskOverlay.addEventListener('click', closeModal);
 
 ## 总结
 
-遮罩和覆盖层在 WeUI 设计体系中的主要作用：
+遮罩和覆盖层在 MimicUI 设计体系中的主要作用：
 
 1. **视觉层次**：通过遮罩突出重要内容（模态框、操作表）
 2. **交互反馈**：提供按钮、列表项的点击反馈

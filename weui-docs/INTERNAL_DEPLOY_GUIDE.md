@@ -76,7 +76,7 @@
 1. **将文件上传到服务器**
    ```bash
    # 使用 scp 上传
-   scp -r dayAndNight/ user@server-ip:/var/www/html/weui-tokens/
+   scp -r dayAndNight/ user@server-ip:/var/www/html/mimicui-tokens/
    
    # 或使用 FTP/SFTP 工具上传
    ```
@@ -87,7 +87,7 @@
        listen 80;
        server_name tokens.internal.company.com;
        
-       root /var/www/html/weui-tokens;
+       root /var/www/html/mimicui-tokens;
        index colorToken.html;
        
        location / {
@@ -113,7 +113,7 @@
 1. **将代码推送到公司 Git 仓库**
    ```bash
    git add .
-   git commit -m "Add WeUI token documentation"
+   git commit -m "Add MimicUI token documentation"
    git push origin main
    ```
 
@@ -166,7 +166,7 @@
    - 确保团队成员有读取权限
 
 3. **访问**
-   - 通过文件路径访问：`\\server\share\weui-tokens\colorToken.html`
+   - 通过文件路径访问：`\\server\share\mimicui-tokens\colorToken.html`
    - 或映射网络驱动器后直接打开
 
 ### 优点
@@ -263,7 +263,7 @@
    <head>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>WeUI 设计体系文档</title>
+     <title>MimicUI 设计体系文档</title>
      <style>
        body {
          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -298,8 +298,8 @@
      </style>
    </head>
    <body>
-     <h1>WeUI 设计体系文档</h1>
-     <p>欢迎查看 WeUI 设计体系的完整文档和 Token 表。</p>
+     <h1>MimicUI 设计体系文档</h1>
+     <p>欢迎查看 MimicUI 设计体系的完整文档和 Token 表。</p>
      
      <a href="colorToken.html" class="link-card">
        <h2>🎨 色彩体系</h2>

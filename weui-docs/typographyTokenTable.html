@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WeUI 文字样式 Token 表</title>
+  <title>MimicUI 文字样式 Token 表</title>
   <style>
     * {
       margin: 0;
@@ -421,8 +421,8 @@
 <body>
   <div class="container">
     <div class="header">
-      <h1>WeUI 文字样式 Token 表</h1>
-      <p>基于微信设计规范的字体系统 | <a href="https://weui-multi-platform.pages.woa.com/guide/" target="_blank" style="color: #07C160; text-decoration: underline;">参考官方文档</a></p>
+      <h1>MimicUI 文字样式 Token 表</h1>
+      <p>基于微信设计规范的字体系统</p>
     </div>
 
     <!-- 页面导航 -->
@@ -466,7 +466,7 @@
     </div>
 
     <div class="footer">
-      <p>WeUI 文字样式体系 | 基于微信设计规范 | <a href="https://weui-multi-platform.pages.woa.com/guide/" target="_blank">参考官方文档</a> | 最后更新: 2025</p>
+      <p>MimicUI 文字样式体系 | 基于微信设计规范 | 最后更新: 2025</p>
     </div>
   </div>
 
@@ -1009,7 +1009,7 @@
           <div style="flex: 1;">
             <div style="font-weight: 600; color: #07C160; margin-bottom: 8px;">组合推荐说明</div>
             <div style="font-size: 14px; color: #666; line-height: 1.6;">
-              以下是根据 WeUI 设计规范和常见使用场景推荐的字体样式与文字颜色组合。
+              以下是根据 MimicUI 设计规范和常见使用场景推荐的字体样式与文字颜色组合。
               这些组合是<strong>推荐使用</strong>的，但并非强制绑定，你可以根据实际需求灵活调整。
             </div>
           </div>
@@ -1271,7 +1271,7 @@
     // 导出 JSON
     function exportToJSON() {
       const exportData = {
-        name: 'WeUI Typography Tokens',
+        name: 'MimicUI Typography Tokens',
         version: '1.0.0',
         description: '基于微信设计规范的完整字体系统',
         tokens: typographyTokens.map(token => ({
@@ -1296,7 +1296,7 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'weui-typography-tokens.json';
+      a.download = 'mimicui-typography-tokens.json';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
