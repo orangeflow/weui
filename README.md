@@ -31,9 +31,14 @@ Next.js 支付应用
 
 ### 🧧 redpacket-app/
 红包应用项目
-- 红包 HTML 页面（redpacket.html, success.html）
+- 红包 HTML 页面（redpacket.html）
 - 红包 React 组件（components/RedPacket/）
 - 完整的红包功能实现
+
+### 💳 payment-app/
+支付应用 HTML 页面
+- 支付成功页面（success.html）
+- 相关的样式和脚本文件
 
 ### 📖 docs/
 项目文档

@@ -2529,8 +2529,20 @@
 
       if (tab === 'comparison') {
         document.getElementById('comparisonTab').classList.add('active');
+        // 如果按色系排列已启用，重新应用排序
+        setTimeout(() => {
+          if (colorFamilyGroupingComponentsEnabled) {
+            toggleColorFamilyGroupingComponents();
+          }
+        }, 100);
       } else if (tab === 'components') {
         document.getElementById('componentsTab').classList.add('active');
+        // 如果按色系排列已启用，重新应用排序
+        setTimeout(() => {
+          if (colorFamilyGroupingComponentsEnabled) {
+            toggleColorFamilyGroupingComponents();
+          }
+        }, 100);
       } else if (tab === 'colors') {
         document.getElementById('colorsTab').classList.add('active');
         generateColorMappingTable();
@@ -3173,6 +3185,8 @@
     // 按色系排列组件内的颜色项
     function toggleColorFamilyGroupingComponents() {
       const checkbox = document.getElementById('groupByColorFamilyComponents');
+      if (!checkbox) return;
+      
       colorFamilyGroupingComponentsEnabled = checkbox.checked;
       
       // 处理组件卡片内的颜色项
@@ -3180,6 +3194,8 @@
       
       colorCards.forEach(card => {
         const colorItems = Array.from(card.querySelectorAll('.color-item'));
+        
+        if (colorItems.length === 0) return;
         
         if (colorFamilyGroupingComponentsEnabled) {
           // 按色系排序
@@ -3238,18 +3254,23 @@
           });
         }
         
-        // 重新插入排序后的项到 card 中
-        // 找到所有非 color-item 的子元素（如 h3, div 等），保留它们
-        const otherChildren = Array.from(card.children).filter(child => !child.classList.contains('color-item'));
+        // 安全地重新组织元素：先保存所有非 color-item 的子元素（克隆它们以避免 innerHTML 的影响）
+        const otherChildren = Array.from(card.children)
+          .filter(child => !child.classList.contains('color-item'))
+          .map(child => child.cloneNode(true));
         
         // 清空 card
         card.innerHTML = '';
         
-        // 先添加非 color-item 的子元素
-        otherChildren.forEach(child => card.appendChild(child));
+        // 重新添加：先添加非 color-item 的子元素（使用克隆的版本）
+        otherChildren.forEach(child => {
+          card.appendChild(child);
+        });
         
-        // 再添加排序后的 color-item
-        colorItems.forEach(item => card.appendChild(item));
+        // 然后添加排序后的 color-item
+        colorItems.forEach(item => {
+          card.appendChild(item);
+        });
       });
       
       // 处理色彩对比部分的颜色项

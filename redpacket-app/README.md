@@ -9,9 +9,6 @@ redpacket-app/
 ├── redpacket.html          # 红包封面选择页面
 ├── redpacket.css           # 红包页面样式
 ├── redpacket.js            # 红包页面脚本
-├── success.html            # 支付成功页面
-├── success.css             # 成功页面样式
-├── success.js              # 成功页面脚本
 └── components/             # React 组件
     └── RedPacket/          # 红包组件库
         ├── RedPacketCard.tsx
@@ -25,7 +22,6 @@ redpacket-app/
 ## HTML 页面
 
 - **redpacket.html** - 红包封面选择页面
-- **success.html** - 支付成功页面
 
 可以直接在浏览器中打开使用。
 

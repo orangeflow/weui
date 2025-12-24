@@ -111,12 +111,13 @@
       margin-top: 16px;
       padding-top: 16px;
       border-top: 1px solid #f0f0f0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     .project-links a {
       display: inline-block;
-      margin-right: 12px;
-      margin-top: 8px;
       padding: 6px 12px;
       background: #f5f5f5;
       color: #07C160;
@@ -124,11 +125,19 @@
       border-radius: 6px;
       font-size: 12px;
       transition: all 0.2s;
+      white-space: nowrap;
     }
 
     .project-links a:hover {
       background: #07C160;
       color: white;
+    }
+
+    .project-links span {
+      display: inline-block;
+      padding: 6px 12px;
+      color: #999;
+      font-size: 12px;
     }
 
     .footer {
@@ -165,10 +174,10 @@
         <h2>WeUI 设计体系文档</h2>
         <p>完整的 WeUI 设计体系 Token 文档，包括色彩体系、设计 Token 表和文字样式 Token 表</p>
         <div class="project-links">
-          <a href="weui-docs/index.html">文档首页</a>
-          <a href="weui-docs/colorToken.html">色彩体系 Token 表</a>
-          <a href="weui-docs/designTokenTable.html">设计 Token 表</a>
-          <a href="weui-docs/typographyTokenTable.html">文字样式 Token 表</a>
+          <a href="weui-docs/index.html" target="_blank" rel="noopener noreferrer">文档首页</a>
+          <a href="weui-docs/colorToken.html" target="_blank" rel="noopener noreferrer">色彩体系 Token 表</a>
+          <a href="weui-docs/designTokenTable.html" target="_blank" rel="noopener noreferrer">设计 Token 表</a>
+          <a href="weui-docs/typographyTokenTable.html" target="_blank" rel="noopener noreferrer">文字样式 Token 表</a>
         </div>
       </div>
 
@@ -178,8 +187,8 @@
         <h2>Web3 Wallet 移动应用</h2>
         <p>Web3 钱包的移动端 Web 应用，包含注册/登录流程和输入手机号页面</p>
         <div class="project-links">
-          <a href="mobile-app/index.html">输入手机号</a>
-          <a href="mobile-app/app.html">注册/登录</a>
+          <a href="mobile-app/index.html" target="_blank" rel="noopener noreferrer">输入手机号</a>
+          <a href="mobile-app/app.html" target="_blank" rel="noopener noreferrer">注册/登录</a>
         </div>
       </div>
 
@@ -187,16 +196,25 @@
       <div class="project-card" style="cursor: default;">
         <span class="project-icon">🧧</span>
         <h2>红包应用</h2>
-        <p>红包功能的完整实现，包含红包封面选择页面、支付成功页面和 React 组件</p>
+        <p>红包功能的完整实现，包含红包封面选择页面和 React 组件</p>
         <div class="project-links">
-          <a href="redpacket-app/redpacket.html">封面选择</a>
-          <a href="redpacket-app/success.html">支付成功</a>
+          <a href="redpacket-app/redpacket.html" target="_blank" rel="noopener noreferrer">封面选择</a>
+        </div>
+      </div>
+
+      <!-- 支付应用 HTML 页面 -->
+      <div class="project-card" style="cursor: default;">
+        <span class="project-icon">💳</span>
+        <h2>支付应用 HTML 页面</h2>
+        <p>支付功能的 HTML 页面实现，包含支付成功页面</p>
+        <div class="project-links">
+          <a href="payment-app/success.html" target="_blank" rel="noopener noreferrer">支付成功</a>
         </div>
       </div>
 
       <!-- Next.js 支付应用 -->
       <div class="project-card" style="cursor: default;">
-        <span class="project-icon">💳</span>
+        <span class="project-icon">⚛️</span>
         <h2>Next.js 支付应用</h2>
         <p>基于 Next.js 的 NFC 支付应用，包含支付界面和交互逻辑</p>
         <div class="project-links">
